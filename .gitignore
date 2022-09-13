@@ -1,0 +1,19 @@
+# python
+__pycache__/
+.venv/
+
+# tests
+.coverage*
+.pytest_cache/
+.mypy_cache/
+htmlcov/
+cov/
+
+# various
+.pdm.toml
+__pypackages__/
+pdm.lock
+
+# editors
+.idea/
+.vscode/
