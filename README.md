@@ -1,4 +1,4 @@
-# CookieCutter
+# Machine Learning Project Template
 
 This projects aims to provide the basic skeleton for a well-configured work repository. Each time you start a new project, please make a copy of this structure in your own repository to gain time and work better, harder, faster and stronger 🤖
 
@@ -24,13 +24,6 @@ This command will give you the list of jobs you can run with the Makefile, they 
 make check-types
 ```
 Will check that types are correctly being used throughout the project. Other provided duties include checking quality, running tests, coverage and cleaning your repo from temporary files.
-
-# [Repository Name]
-[Repository logo (optional)] [Repo badges (optional)]
-
-**Why:** [State repository goals/what problem(s) it solves. [Why was it created](https://ianjseath.wordpress.com/2016/06/13/the-golden-circle-for-project-success-start-with-why/).]
-
-**What:** [Describe very briefly but clearly what the repository does.]
 
 <br/>
 
