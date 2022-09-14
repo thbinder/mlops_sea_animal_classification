@@ -6,6 +6,7 @@ RUN pip install -U pip setuptools wheel
 RUN pip install pdm
 
 # copy files
+WORKDIR .
 COPY pyproject.toml pdm.lock README.md /project/
 COPY src/ /project/src
 
