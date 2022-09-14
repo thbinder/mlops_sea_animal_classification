@@ -4,6 +4,7 @@ DUTY = $(shell [ -n "${VIRTUAL_ENV}" ] || echo pdm run) duty
 
 BASIC_DUTIES = \
 	clean \
+	clean-experiments \
 	coverage \
 	format
 

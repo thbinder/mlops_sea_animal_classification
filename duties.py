@@ -102,3 +102,14 @@ def clean(ctx):
     ctx.run("rm -rf build")
     ctx.run("find . -type d -name __pycache__ | xargs rm -rf")
     ctx.run("find . -name '*.rej' -delete")
+
+@duty(silent=True)
+def clean_experiments(ctx):
+    """
+    Delete previous ALL previous experiments
+
+    Arguments:
+        ctx: The context instance (passed automatically)
+    """
+    ctx.run("rm -rf ./mlruns*")
+    ctx.run("rm -rf ./outputs*")
