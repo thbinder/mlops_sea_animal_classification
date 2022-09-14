@@ -5,7 +5,7 @@ pipeline {
             agent any
             steps {
                 sh 'ls -l'
-                sh 'docker build -t ml_template:latest .'
+                sh 'docker build -t ml_template:0.1 .'
             }
         }
          stage('Push') {
