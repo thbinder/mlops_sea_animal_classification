@@ -52,10 +52,11 @@ docker run \
   --publish 2376:2376 \
   docker:dind \
   --storage-driver overlay2
+```
 
 Build and start jenkins image
 ```
-cd infra
+cd infra/jenkins/
 docker build -t myjenkins-blueocean:2.346.3-1 .
 docker run \
   --name jenkins-blueocean \
