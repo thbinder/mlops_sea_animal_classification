@@ -6,8 +6,6 @@ pipeline {
             steps {
                 sh 'ls -l'
                 sh 'docker build -t thomasbinder/ml_template:0.1 .'
-                sh 'docker login'
-                sh 'docker push thomasbinder/ml_template:0.1'
             }
         }
     }
