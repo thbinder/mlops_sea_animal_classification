@@ -42,6 +42,9 @@ quality = [
 duty = [
     "duty~=0.7",
 ]
+exploration = [
+    "mlflow>=1.28.0",
+]
 
 [tool.black]
 [tool.isort]
