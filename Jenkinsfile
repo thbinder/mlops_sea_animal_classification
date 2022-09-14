@@ -1,14 +1,10 @@
 pipeline {
     agent none
     stages {
-        stage('Test') {
-            agent {
-                docker {
-                    image 'python:3.8-alpine'
-                }
-            }
+        stage('Docker Build') {
+            agent any
             steps {
-                sh 'python3.8 -m pytest tests'
+                sh 'docker build -t ml_template:latest .'
             }
         }
     }
