@@ -12,7 +12,6 @@ cov/
 # various
 .pdm.toml
 __pypackages__/
-pdm.lock
 
 # editors
 .idea/
