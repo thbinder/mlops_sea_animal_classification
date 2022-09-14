@@ -4,9 +4,14 @@ pipeline {
         stage('Build') {
             agent any
             steps {
-                sh 'echo current directory'
                 sh 'ls -l'
                 sh 'docker build -t ml_template:latest .'
+            }
+        }
+         stage('Push') {
+            agent any
+            steps {
+                sh 'docker push thomasbinder/ml_template:0.1'
             }
         }
     }
