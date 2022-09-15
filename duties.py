@@ -113,3 +113,9 @@ def clean_experiments(ctx):
     """
     ctx.run("rm -rf ./mlruns*")
     ctx.run("rm -rf ./outputs*")
+    ctx.run("rm -rf ./notebooks/checkpoint*")
+    ctx.run("rm -rf ./notebooks/*data*")
+    ctx.run("rm -rf ./notebooks/*index*")
+    ctx.run("rm -rf ./notebooks/mlruns")
+    ctx.run("rm -rf ./notebooks/model")
+    ctx.run("rm -rf ./notebooks/outputs")
