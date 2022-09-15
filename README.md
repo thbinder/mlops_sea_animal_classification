@@ -10,7 +10,7 @@ You can use this following lines to start a new project:
 ```
 The setup script will ensure pipx and pdm are installed with your current python version. Then, it will run the command pdm install which basically sets you up for working with the repo. Then, you can complete the information about your project and delete all the previous lines within the pyproject.toml. At least change name, description and authors... 
 
-Alternatively, you can install PDM the way you prefer.
+Alternatively, you can install [PDM](https://github.com/pdm-project/pdm) the way you prefer.
 
 To run basic duties locally you can simply try out the following commands:
 ```
