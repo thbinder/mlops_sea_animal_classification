@@ -7,6 +7,9 @@ notebooks/checkpoint
 notebooks/*.index
 notebooks/*.data*
 
+# data
+data/
+
 # python
 __pycache__/
 .venv/
