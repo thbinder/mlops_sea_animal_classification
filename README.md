@@ -25,8 +25,6 @@ make check-types
 ```
 Will check that types are correctly being used throughout the project. Other provided duties include checking quality, running tests, coverage and cleaning your repo from temporary files.
 
-<br/>
-
 💻  Run Jenkins Pipeline (local)
 -------------
 
@@ -96,16 +94,6 @@ Run a Docker image
 ```
 docker run <IMAGE_NAME> -p 8080:127.0.0.1:8080
 ```
-
-<br/>
-
-🐳 Push Docker image
-------------
-
-OPTIONAL
-Explain how to push your Docker image to AWS Elastic Container registry (ECR).
-
-<br/>
 
 
 🗃 Project Organization
