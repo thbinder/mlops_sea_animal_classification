@@ -1,7 +1,7 @@
 [project]
-name = "ML_TEMPLATE"
+name = "ML_PROJECT_EXAMPLE"
 version = "0.1"
-description = "ML Template for Python"
+description = "ML Project Template for Python"
 authors = [
     {name = "Thomas Binder", email = ""},
 ]
