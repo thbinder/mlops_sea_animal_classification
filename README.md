@@ -18,7 +18,16 @@ make help
 ```
 This command will give you the list of jobs you can run with the Makefile, they should be self explanatory. They include starting unit testing, checking quality, running tests, coverage and cleaning your repo from temporary files.
 
-💻 SetUp Jenkins Pipeline (local)
+💻 MLFlow (local)
+-------------
+
+Build and launch mlflow local server from the infra folder. For more information refer to the related readme.
+```
+cd infra/mlflow
+docker-compose up -d --build
+```
+
+💻 Jenkins (local)
 -------------
 
 Build blueocean Jenkins Docker images.
@@ -47,7 +56,7 @@ docker run \
 
 Build and start jenkins image
 ```
-cd infra/jenkins/
+cd infra/jenkins/jenkins/
 docker build -t myjenkins-blueocean:2.346.3-1 .
 docker run \
   --name jenkins-blueocean \

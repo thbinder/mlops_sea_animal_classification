@@ -1,0 +1,5 @@
+cryptography==37.0.4
+boto3==1.24.31
+mlflow==1.28.0
+pymysql==1.0.2
+protobuf==3.20.0
