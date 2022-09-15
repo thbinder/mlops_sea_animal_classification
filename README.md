@@ -1,31 +1,24 @@
 # Machine Learning Project Template
 
-This projects aims to provide the basic skeleton for a well-configured work repository. Each time you start a new project, please make a copy of this structure in your own repository to gain time and work better, harder, faster and stronger 🤖
-
+This projects aims to provide the basic skeleton for a well-configured work repository. Each time you start a new project, one can copy this structure to gain time and work better, harder, faster and stronger 🤖
 
 ## Getting started with this template
-Create an empty GitHub repository for your new projet. 
-Then you can use this following lines to start a new project:
 
+You can use this following lines to start a new project:
 ```
-cd <NEW_PROJECT_NAME>
 ./scripts/setup.sh
 ```
+The setup script will ensure pipx and pdm are installed with your current python version. Then, it will run the command pdm install which basically sets you up for working with the repo. Then, you can complete the information about your project and delete all the previous lines within the pyproject.toml. At least change name, description and authors... 
 
-The setup script will ensure pipx and pdm are installed with your current python version. Then, it will run the command pdm install which basically sets you up for working with the repo. Then, you can complete the information about your project and delete all the previous lines within the pyproject.toml. At least change name, description and authors.
+Alternatively, you can install PDM the way you prefer.
 
 To run basic duties locally you can simply try out the following commands:
 ```
 make help
 ```
-This command will give you the list of jobs you can run with the Makefile, they should be self explanatory. For example,
+This command will give you the list of jobs you can run with the Makefile, they should be self explanatory. They include starting unit testing, checking quality, running tests, coverage and cleaning your repo from temporary files.
 
-```
-make check-types
-```
-Will check that types are correctly being used throughout the project. Other provided duties include checking quality, running tests, coverage and cleaning your repo from temporary files.
-
-💻  Run Jenkins Pipeline (local)
+💻 SetUp Jenkins Pipeline (local)
 -------------
 
 Build blueocean Jenkins Docker images.
@@ -76,33 +69,24 @@ Run docker logs to retrieve Jenkins token
 docker logs jenkins-blueocean
 ```
 
-You can then safely navigate to localhost:8080 to connect to your Jenkins deployment. If you are having a plugin issue, just navigate to localhost:8080/restart.
+You can then safely navigate to localhost:8080 to connect to your Jenkins deployment and setup your pipeline if it wasn't previously configured. If you are having a plugin issue, just navigate to localhost:8080/restart.
 
-💻  Installation (local)
+🐳 Installation (local)
 -------------
 
-Build of Docker image
+Build and Run Docker image
 ```
 docker build -t <IMAGE_NAME> .
-```
-
-
-🐳 Run Docker image
-------------
-
-Run a Docker image
-```
 docker run <IMAGE_NAME> -p 8080:127.0.0.1:8080
 ```
-
 
 🗃 Project Organization
 ------------
 
-The `notebooks` folder contains the different visualisation and experimentation notebooks that can be needed during the exploration process.
+The `notebooks` folder contains the different visualisation and experimentation notebooks that can be needed during the exploration process. I have added an example which leverages the features of an mlflow server. You can setup your own in whichever way you like and change the tracking uri so that the notebook sends data to the correct location.
 
-The `src` folder contains your actual code. You will see 4 directories within the `src` folder:
-- `data`: should contain any I/O-related script, for instance reading from and writing to S3 buckets, file conversions, reading a `.json` file. In a sense, see `data` as your code interaction with the outside world.
-- `env`: should contain your configuration script(s) that read environement variable such as the (uncommitted) `.env` file and turns them into Python global variables across your whole package.
-- `domain`: contains all Python scripts related to the internal workings of your code, like data cleaning, processing, formatting,...This layer has no interaction with the outside world
+The `src` folder should contain actual production code.
+- `data`: should contain any I/O-related script: reading from and writing to S3 buckets, file conversions, reading a `.json` file. It covers interactions with the outside world.
+- `env`: should contain your configuration script(s) that read environement variable and turns them into Python global variables across your whole package.
+- `domain`: contains all Python modules related to the internal workings of your code, like data cleaning, processing, formatting...This layer has no interaction with the outside world.
 - `application`: contains your main code functions, for example the `main.py` script if your code as a sole purpose. In the case of an ML project repository, `application` may contain several scripts like `train.py`, `predict.py`. The main function should be clear, concise and relay on methods defined on the `domain` directory.
