@@ -30,57 +30,15 @@ docker-compose up -d --build
 💻 Jenkins (local)
 -------------
 
-Build blueocean Jenkins Docker images.
+Build and launch jenkins local server from the infra folder. For more information refer to the related readme.
 ```
-docker pull jenkins/jenkins
-docker pull docker:dind
-docker network create jenkins
-```
-
-Run first docker image (docker in docker)
-```
-docker run \
-  --name jenkins-docker \
-  --rm \
-  --detach \
-  --privileged \
-  --network jenkins \
-  --network-alias docker \
-  --env DOCKER_TLS_CERTDIR=/certs \
-  --volume jenkins-docker-certs:/certs/client \
-  --volume jenkins-data:/var/jenkins_home \
-  --publish 2376:2376 \
-  docker:dind \
-  --storage-driver overlay2
-```
-
-Build and start jenkins image
-```
-cd infra/jenkins/jenkins/
-docker build -t myjenkins-blueocean:2.346.3-1 .
-docker run \
-  --name jenkins-blueocean \
-  --restart=on-failure \
-  --detach \
-  --network jenkins \
-  --env DOCKER_HOST=tcp://docker:2376 \
-  --env DOCKER_CERT_PATH=/certs/client \
-  --env DOCKER_TLS_VERIFY=1 \
-  --publish 8080:8080 \
-  --publish 50000:50000 \
-  --volume jenkins-data:/var/jenkins_home \
-  --volume jenkins-docker-certs:/certs/client:ro \
-  myjenkins-blueocean:2.346.3-1
-```
-
-Run docker logs to retrieve Jenkins token
-```
-docker logs jenkins-blueocean
+cd infra/jenkins
+docker-compose up -d --build
 ```
 
 You can then safely navigate to localhost:8080 to connect to your Jenkins deployment and setup your pipeline if it wasn't previously configured. If you are having a plugin issue, just navigate to localhost:8080/restart.
 
-🐳 Installation (local)
+🐳 Deployment (local)
 -------------
 
 Build and Run Docker image
