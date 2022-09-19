@@ -1105,7 +1105,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "4.0"
-content_hash = "sha256:d5c6e838b7ec39293473bb9447b36edd69cc3d626438d59c2f3c69760d8497a8"
+content_hash = "sha256:a051b06db4d517ab308ddffe52004f391bf180e99b02f2cc26f6dc29d91afc1c"
 
 [metadata.files]
 "absl-py 0.15.0" = [
