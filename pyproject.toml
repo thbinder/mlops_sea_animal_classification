@@ -10,7 +10,7 @@ dependencies = [
     "uvicorn>=0.18.3",
     "fastapi>=0.84.0",
 ]
-requires-python = ">=3.8"
+requires-python = "==3.8.14"
 license = {text = "MIT"}
 [project.optional-dependencies]
 
