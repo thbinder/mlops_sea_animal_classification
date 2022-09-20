@@ -530,6 +530,15 @@ version = "0.6.1"
 summary = "McCabe checker, plugin for flake8"
 
 [[package]]
+name = "minio"
+version = "7.1.11"
+summary = "MinIO Python SDK for Amazon S3 Compatible Cloud Storage"
+dependencies = [
+    "certifi",
+    "urllib3",
+]
+
+[[package]]
 name = "mlflow-skinny"
 version = "1.28.0"
 requires_python = ">=3.7"
@@ -582,6 +591,15 @@ name = "oauthlib"
 version = "3.2.1"
 requires_python = ">=3.6"
 summary = "A generic, spec-compliant, thorough implementation of the OAuth request-signing logic"
+
+[[package]]
+name = "opencv-python"
+version = "4.5.4.60"
+requires_python = ">=3.6"
+summary = "Wrapper package for OpenCV python bindings."
+dependencies = [
+    "numpy>=1.17.3",
+]
 
 [[package]]
 name = "opt-einsum"
@@ -784,6 +802,14 @@ requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
 summary = "Extensions to the standard Python datetime module"
 dependencies = [
     "six>=1.5",
+]
+
+[[package]]
+name = "python-multipart"
+version = "0.0.5"
+summary = "A streaming multipart parser for Python"
+dependencies = [
+    "six>=1.4.0",
 ]
 
 [[package]]
@@ -1105,7 +1131,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "4.0"
-content_hash = "sha256:a051b06db4d517ab308ddffe52004f391bf180e99b02f2cc26f6dc29d91afc1c"
+content_hash = "sha256:63a8aa29323b71025d8d5dd249bc05c2d280533d92906433e7c09a21e6b57ccd"
 
 [metadata.files]
 "absl-py 0.15.0" = [
@@ -1697,6 +1723,10 @@ content_hash = "sha256:a051b06db4d517ab308ddffe52004f391bf180e99b02f2cc26f6dc29d
     {url = "https://files.pythonhosted.org/packages/06/18/fa675aa501e11d6d6ca0ae73a101b2f3571a565e0f7d38e062eec18a91ee/mccabe-0.6.1.tar.gz", hash = "sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"},
     {url = "https://files.pythonhosted.org/packages/87/89/479dc97e18549e21354893e4ee4ef36db1d237534982482c3681ee6e7b57/mccabe-0.6.1-py2.py3-none-any.whl", hash = "sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42"},
 ]
+"minio 7.1.11" = [
+    {url = "https://files.pythonhosted.org/packages/2c/57/9fb02b5eb192019daea018b4cc50b0ab637b45aa47c8e5bc571018a096ab/minio-7.1.11.tar.gz", hash = "sha256:12ac2d1d4fd3cea159d625847445e1bfceba3fbc2f4ab692c2d2bf716f82246c"},
+    {url = "https://files.pythonhosted.org/packages/3e/71/aa107457cd97ad3802a1048d84a347000eb18f257739cda5a101f3b7931f/minio-7.1.11-py3-none-any.whl", hash = "sha256:1cab424275749b8b5b8bb0c6cc856d667305ef549796ae56f3237fe55306a1fc"},
+]
 "mlflow-skinny 1.28.0" = [
     {url = "https://files.pythonhosted.org/packages/18/53/6f6be355d21e1609627ad4eee830c02837031c2a4c0d7e355547a6ba5f28/mlflow_skinny-1.28.0-py3-none-any.whl", hash = "sha256:27aefe0f8fde621ce0ae4d09afdc902ae5e1dfca66f042d7e149425fb1f6f305"},
     {url = "https://files.pythonhosted.org/packages/45/ee/d3b51c09500b37ce27574fc97111f93f4f7458fe88479955dcb1ccb5285c/mlflow-skinny-1.28.0.tar.gz", hash = "sha256:18440d8e428713f43c0e0d4b520dce8c04910224c4559ec88f6c3aa388a60ec4"},
@@ -1773,6 +1803,38 @@ content_hash = "sha256:a051b06db4d517ab308ddffe52004f391bf180e99b02f2cc26f6dc29d
 "oauthlib 3.2.1" = [
     {url = "https://files.pythonhosted.org/packages/92/bb/d669baf53d4ffe081dab80aad93c5c79f84eeac885dd31507c8c055a98d5/oauthlib-3.2.1-py3-none-any.whl", hash = "sha256:88e912ca1ad915e1dcc1c06fc9259d19de8deacd6fd17cc2df266decc2e49066"},
     {url = "https://files.pythonhosted.org/packages/fe/58/30a4d3302f9bbd602c43385e7270fc3a9e8a665d07aafd6a4d4baa844739/oauthlib-3.2.1.tar.gz", hash = "sha256:1565237372795bf6ee3e5aba5e2a85bd5a65d0e2aa5c628b9a97b7d7a0da3721"},
+]
+"opencv-python 4.5.4.60" = [
+    {url = "https://files.pythonhosted.org/packages/00/d0/b1c2ca5f539add3a2b73793812d07c859d44cd688ab6d327bb9674702d42/opencv_python-4.5.4.60-cp39-cp39-win32.whl", hash = "sha256:5f62798d00efc1299cc87fcc788b11d0541114f0df35e0f2033c34751e4f708e"},
+    {url = "https://files.pythonhosted.org/packages/01/3e/7d78af10b3286903721438791bbc15fcbb12b7e72dc19fb637bc83489752/opencv_python-4.5.4.60-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ba0fb91d916fce3f6b7ac5be2d365d3949ba8a176262cf6a6dd366967544fa4d"},
+    {url = "https://files.pythonhosted.org/packages/11/a5/0ee8573422365086f065f7f54718506489db89371bc09de3b025ccc86515/opencv_python-4.5.4.60-cp39-cp39-win_amd64.whl", hash = "sha256:abfecb14c7fc23c5c1337a71b67cc852d79de67311a9a557c41a37bf5de35bf9"},
+    {url = "https://files.pythonhosted.org/packages/1b/48/12469b15942d468128969301ee005e1f4e746ed9d7f93ed983103ca661a1/opencv_python-4.5.4.60-cp36-cp36m-macosx_10_15_x86_64.whl", hash = "sha256:f5902060f14a83d363163dd1bbf54876977c379fb56666e5557394eecca1f364"},
+    {url = "https://files.pythonhosted.org/packages/1d/e5/ed1c0d6c8225008dae214e7f2992f474b106c7c4e7779d223e14719ee2ee/opencv_python-4.5.4.60-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:811f0df2a3ecaf7dacd77394862f3e0a04feedae190a51fd50c243016f1da7ff"},
+    {url = "https://files.pythonhosted.org/packages/2c/0e/232930882b7d13f57761230d3ebe74cbc191a991c7520038cd6c9806f304/opencv_python-4.5.4.60-cp37-cp37m-macosx_10_15_x86_64.whl", hash = "sha256:e688176481d9ace9f166eac9dbb0313cbb9b4d1aef82e57632c4db404bd33942"},
+    {url = "https://files.pythonhosted.org/packages/3e/39/ce5a4f552f561a0038a32ccd296bd19bddd5646465c3439b83030ebd147c/opencv_python-4.5.4.60-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7d0bce53e1edf6e5d4eafd274bcfa314b506a10f12bce74f15b0a52cbadb87db"},
+    {url = "https://files.pythonhosted.org/packages/3e/7a/bf88ab36a61edc087b0ba68ec4e42cb41193a0b3875b692760bc66c4e0cf/opencv_python-4.5.4.60-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:febc6e52db03cc0ca1cd2fc56c8f94ac15349ca19d10732261c766c463e681a6"},
+    {url = "https://files.pythonhosted.org/packages/48/33/074e478163c64786e2f78f3638d22956442a7dd1f463ae41c05abe03fab9/opencv_python-4.5.4.60-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:93704f7f873acb4fdb0fe62f9b62c000ec0e5a4c6af55578fd596b089dc4eb4f"},
+    {url = "https://files.pythonhosted.org/packages/57/6c/7f4f56b2555d5c25dd4f41fc72a16dc6402cb2b4f967da11d8d26c669b55/opencv_python-4.5.4.60-cp36-cp36m-win_amd64.whl", hash = "sha256:22765c4a9249bca0764a9ae82fe849a43708db21a9984ac1406503db97816bee"},
+    {url = "https://files.pythonhosted.org/packages/60/7f/0633f550f8db8f7663428bdc8e435c2b68966065c4bc518f7363f0f52763/opencv_python-4.5.4.60-cp37-cp37m-win_amd64.whl", hash = "sha256:3eed69cb9a95fc51ecc5463f2d5f50dcc8b9e01dc5ae8dbb423df2937f415304"},
+    {url = "https://files.pythonhosted.org/packages/60/9d/d20e1831d4a7e73f3b8c714214eddc266459cdf6efc8fcbf3434400ab743/opencv_python-4.5.4.60-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b336f17bf90be734ec6d1bbbfc9fa8130fb1c110ff0746ab4374ba0422ea15a5"},
+    {url = "https://files.pythonhosted.org/packages/66/ce/18e2775ca651286cd86b2d3676240c1d931fd78faf90e80d10b70feecad1/opencv_python-4.5.4.60-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b861c96a31d5d9c60fd0e4e8b05eb258a2da0ec77e7eae5711a71159627c1548"},
+    {url = "https://files.pythonhosted.org/packages/68/40/e8e53a29ff3bfb0276d30a4a222474da74921b343567a324c9cdefeeae5c/opencv_python-4.5.4.60-cp310-cp310-win_amd64.whl", hash = "sha256:5eab0f45a33fdbb62a6984538a97e9f8b33d370afd35face04036a3195dbb787"},
+    {url = "https://files.pythonhosted.org/packages/87/02/1ede387e843e309b96ff9a2fb40e35aae0e29042f6e9c37f4984570a97e6/opencv_python-4.5.4.60-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:34ff0af4a40a36aa19e02a3efd27b4f68afbf60d631d1fd1aeb5b73b525943d7"},
+    {url = "https://files.pythonhosted.org/packages/87/7f/92d75cc58781877b6446c8d35a1b6bf11c914d6a39418819405b63531e4b/opencv_python-4.5.4.60-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:340999b852ca03f1f4ec058f3bb71dfb45b9b1b538fad13985e6fea8abbd6eb0"},
+    {url = "https://files.pythonhosted.org/packages/91/cc/0d95680da55976c59322e7855abee7f0982a596bcc8e2d3320fab572b75b/opencv_python-4.5.4.60-cp37-cp37m-win32.whl", hash = "sha256:9e9d4e11b6e50ebe726daa2f0f7724fd877769476e352a7274f2107a3094de40"},
+    {url = "https://files.pythonhosted.org/packages/98/f2/bb987469ec60b35d5453a61283f43a953f531f6653cc68fbc8b376cf1a9f/opencv_python-4.5.4.60-cp38-cp38-macosx_10_15_x86_64.whl", hash = "sha256:eebe92d48833fe244ef19b88bcd8f7c4f61713a4f6d46694dd538025ac38aa1c"},
+    {url = "https://files.pythonhosted.org/packages/a9/d3/41c05e2f898a1270207fd2f3835348744a90cfe4c1870f51bea50f2e515b/opencv_python-4.5.4.60-cp36-cp36m-win32.whl", hash = "sha256:5fe9ba0be2f0f15e64ccd19c9d050d163cc70d9b718b6a03564056c0ae4be8e8"},
+    {url = "https://files.pythonhosted.org/packages/aa/46/42cfddc4170a8a3a9a5e55258daffb3fbac4b68664bef2471f57829e8856/opencv_python-4.5.4.60-cp38-cp38-win_amd64.whl", hash = "sha256:9141e88bfa67d9d4ac750fec18449065d105b8b3d00bbfb58b097bcc4fa6f018"},
+    {url = "https://files.pythonhosted.org/packages/af/85/752f06bc51bfabdb4cab357598730681eac4249402c016c4b3b2446842b9/opencv_python-4.5.4.60-cp37-cp37m-macosx_11_0_arm64.whl", hash = "sha256:9e9c2835c853d45b8f73628e14ca358e0d15132a703e7728a35269fa233792fc"},
+    {url = "https://files.pythonhosted.org/packages/bb/8a/e94f2eb7c235d73f237f1f59d702b2f8e70d558a50ed679f8f613ece5072/opencv_python-4.5.4.60-cp38-cp38-win32.whl", hash = "sha256:1617dc24fe670f128fc49e0b57f1fecdc7b41babd2ccc9b7a1d9491045e32c27"},
+    {url = "https://files.pythonhosted.org/packages/bc/b6/e447d0302bc328f06b56dabd6742648372df63446725db56058a259dbda2/opencv-python-4.5.4.60.tar.gz", hash = "sha256:f609558a8fe1bf66f6c81816ca14d8e51500c8b53ee44bc644c73f98f1c5655e"},
+    {url = "https://files.pythonhosted.org/packages/c1/dc/fa2a63652fccbbbcd37f0eee863d5f05c2e40d100a77443dd1ba3f27d8be/opencv_python-4.5.4.60-cp39-cp39-macosx_10_15_x86_64.whl", hash = "sha256:fb8b81e1756522def5518914d916205da5cf34796b60adb592373991d100c769"},
+    {url = "https://files.pythonhosted.org/packages/c2/ec/169c1783c4f84a08b76051ccbf76a08f3aba63170abdf7e3cac577e8b817/opencv_python-4.5.4.60-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:aa6b688804e8590851d5f7c96886c9bd8cdd105c7ae6776f03c5ecd35465c062"},
+    {url = "https://files.pythonhosted.org/packages/cf/2d/e2f404a4816ba5f76bd7fef2f58689d5e60e84da6aeb6d5574580206e2c0/opencv_python-4.5.4.60-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7c95121d88c18affb3ac338d7faa137f7ccaa801c07db5a43d775f95d0f50ec1"},
+    {url = "https://files.pythonhosted.org/packages/dc/cc/71aaf61a5bd0089413cdad87a3b92d1b4d4b4fbb4c7d33023b5b63f4392e/opencv_python-4.5.4.60-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:9aa3d2fcaad79681720128ffe402a2ad9fbb524826a431ae9773d29ae3075967"},
+    {url = "https://files.pythonhosted.org/packages/e4/0b/8d9edc01e12f2b271cabf8537733d202a5ba2a2e3d96167db65bcf43c5e7/opencv_python-4.5.4.60-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:26dccfb820e01ba822255d093139934a26ad4c5e8a74a7b79e71f8d5c2a0d186"},
+    {url = "https://files.pythonhosted.org/packages/f6/6a/6e4917ea2413930f0d5781c21097f3e07042133be3eebe6b7f889978ac4a/opencv_python-4.5.4.60-cp310-cp310-win32.whl", hash = "sha256:62161bf98661baa7dbc13971bd873303a28d5ef1c5f00e6a030b6e6da2025abd"},
+    {url = "https://files.pythonhosted.org/packages/fe/0a/96e00caf7a4d9ce79c8eeac1ae3880833e11913e5719a85b259103bcb1c6/opencv_python-4.5.4.60-cp310-cp310-macosx_11_0_x86_64.whl", hash = "sha256:84fdfbb88836039e812f36cdc4a9c8bd330827084b0849ffec7a0b143ad980d9"},
 ]
 "opt-einsum 3.3.0" = [
     {url = "https://files.pythonhosted.org/packages/7d/bf/9257e53a0e7715bc1127e15063e831f076723c6cd60985333a1c18878fb8/opt_einsum-3.3.0.tar.gz", hash = "sha256:59f6475f77bbc37dcf7cd748519c0ec60722e91e63ca114e68821c0c54a46549"},
@@ -2045,6 +2107,9 @@ content_hash = "sha256:a051b06db4d517ab308ddffe52004f391bf180e99b02f2cc26f6dc29d
 "python-dateutil 2.8.2" = [
     {url = "https://files.pythonhosted.org/packages/36/7a/87837f39d0296e723bb9b62bbb257d0355c7f6128853c78955f57342a56d/python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
     {url = "https://files.pythonhosted.org/packages/4c/c4/13b4776ea2d76c115c1d1b84579f3764ee6d57204f6be27119f13a61d0a9/python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
+]
+"python-multipart 0.0.5" = [
+    {url = "https://files.pythonhosted.org/packages/46/40/a933ac570bf7aad12a298fc53458115cc74053474a72fbb8201d7dc06d3d/python-multipart-0.0.5.tar.gz", hash = "sha256:f7bb5f611fc600d15fa47b3974c8aa16e93724513b49b5f95c81e6624c83fa43"},
 ]
 "python-slugify 6.1.2" = [
     {url = "https://files.pythonhosted.org/packages/5d/45/915967d7bcc28fd12f36f554e1a64aeca36214f2be9caf87158168b5a575/python-slugify-6.1.2.tar.gz", hash = "sha256:272d106cb31ab99b3496ba085e3fea0e9e76dcde967b5e9992500d1f785ce4e1"},

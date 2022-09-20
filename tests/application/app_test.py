@@ -5,7 +5,15 @@ from src.application.app import app
 client = TestClient(app)
 
 
-def test_root():
-    response = client.get("/")
+def test_ping():
+    response = client.get("/ping")
     assert response.status_code == 200
-    assert response.json() == {"message": "Hello World"}
+    assert response.json() == {"message": "pong!"}
+
+def test_predict():
+    
+    _test_upload_file = "./test_data/nudibranch.jpg"
+    response = client.post(
+        "/predict", files={"file": ("filename", open(_test_upload_file, "rb"), "image/jpeg")}
+    )
+    assert response.status_code == 200

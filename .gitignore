@@ -1,11 +1,11 @@
 # ml
 mlruns
 outputs
-notebooks/mlruns
-notebooks/model
-notebooks/checkpoint
-notebooks/*.index
-notebooks/*.data*
+exploration/mlruns
+exploration/model
+exploration/checkpoint
+exploration/*.index
+exploration/*.data*
 
 # data
 data/

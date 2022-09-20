@@ -39,7 +39,7 @@ def check_types(ctx):
         f"mypy --config-file config/mypy.ini {PY_SRC}",
         title="Checking types",
         nofail=True,
-        quiet=True,
+        quiet=False,
     )
 
 
@@ -114,9 +114,9 @@ def clean_experiments(ctx):
     """
     ctx.run("rm -rf ./mlruns*")
     ctx.run("rm -rf ./outputs*")
-    ctx.run("rm -rf ./notebooks/checkpoint*")
-    ctx.run("rm -rf ./notebooks/*data*")
-    ctx.run("rm -rf ./notebooks/*index*")
-    ctx.run("rm -rf ./notebooks/mlruns")
-    ctx.run("rm -rf ./notebooks/model")
-    ctx.run("rm -rf ./notebooks/outputs")
+    ctx.run("rm -rf ./exploration/checkpoint*")
+    ctx.run("rm -rf ./exploration/*data*")
+    ctx.run("rm -rf ./exploration/*index*")
+    ctx.run("rm -rf ./exploration/mlruns")
+    ctx.run("rm -rf ./exploration/model")
+    ctx.run("rm -rf ./exploration/outputs")
