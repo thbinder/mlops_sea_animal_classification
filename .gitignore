@@ -2,7 +2,6 @@
 mlruns
 outputs
 exploration/mlruns
-exploration/model
 exploration/checkpoint
 exploration/*.index
 exploration/*.data*
