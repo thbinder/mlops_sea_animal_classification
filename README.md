@@ -38,6 +38,8 @@ docker-compose up -d --build
 
 You can then safely navigate to localhost:8080 to connect to your Jenkins deployment and setup your pipeline if it wasn't previously configured. If you are having a plugin issue, just navigate to localhost:8080/restart.
 
+To make the current Jenkinsfile work, you will need to create a set of credentials for your registry. Here we use DockerHub and an associated access token for Jenkins [used through the Credentials Plugin](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/injecting-secrets).
+
 🐳 Deployment (local)
 -------------
 
