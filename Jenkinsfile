@@ -12,7 +12,7 @@ pipeline {
             agent any
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_secret_key', passwordVariable: 'password', usernameVariable: 'username')]) {
-                    sh 'docker login -u username -p password'
+                    sh 'docker login -u $username -p $password'
                 }
                 sh 'docker push thomasbinder/ml_template:0.1'
             }
