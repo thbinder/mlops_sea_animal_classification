@@ -27,7 +27,7 @@ RUN apt-get install -y libopencv-features2d-dev
 ENV PYTHONPATH=/project/pkgs
 COPY --from=builder /project/__pypackages__/3.8/lib /project/pkgs
 # TODO: Should be retrieved from an artifact registry
-# COPY exploration/model /exploration/model
+COPY exploration/model /exploration/model/
 
 
 # set command/entrypoint, adapt to fit your needs
