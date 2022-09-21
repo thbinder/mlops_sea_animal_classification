@@ -1,19 +1,18 @@
-import cv2
 import logging
+
+import cv2
 import numpy as np
 import tensorflow as tf
 from fastapi import FastAPI, File, UploadFile
 
 logging.basicConfig(
-     level=logging.INFO, 
-     format= '[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
-     datefmt='%H:%M:%S'
+    level=logging.INFO,
+    format="[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s",
+    datefmt="%H:%M:%S",
 )
 logger = logging.getLogger(__name__)
 
-MODEL = tf.keras.models.load_model(
-    "./exploration/model"
-)
+MODEL = tf.keras.models.load_model("./exploration/model")
 
 app = FastAPI()
 
