@@ -4,7 +4,7 @@ from tensorflow.keras.layers import Dense, Dropout, Input, Lambda
 from tensorflow.keras.models import Sequential
 
 
-def build_model(input_shape, denses):
+def build_model(input_shape, denses, dropout):
     before_mobilenet = Sequential(
         [
             Input(shape=input_shape),
@@ -20,9 +20,9 @@ def build_model(input_shape, denses):
     after_mobilenet = Sequential(
         [
             Dense(denses[0], activation="relu"),
-            Dropout(0.2),
+            Dropout(dropout[0]),
             Dense(denses[1], activation="relu"),
-            Dropout(0.2),
+            Dropout(dropout[1]),
             Dense(denses[2], activation="softmax"),
         ]
     )

@@ -9,9 +9,12 @@ dependencies = [
     "requests>=2.28.1",
     "uvicorn>=0.18.3",
     "fastapi>=0.84.0",
-    "tensorflow>=2.0.0",
     "python-multipart>=0.0.5",
     "opencv-python>=4.5.4.60",
+    "zenml>=0.13.2",
+    "tensorflow==2.8.0",
+    "tensorflow-io==0.24.0",
+    "python-dotenv>=0.21.0",
 ]
 requires-python = "==3.8.10"
 license = {text = "MIT"}
