@@ -2,7 +2,8 @@ name: training_pipeline
 steps:
   load_data:
     source:
-      name: image_data_loader
+      name: train_data_loader
+      file: src/domain/steps/data_loader.py
     parameters:
       test_size: 0.2
       data_path: './data'
@@ -10,6 +11,7 @@ steps:
   train_model:
     source:
       name: train_classifier
+      file: src/domain/steps/mlflow_trainer.py
     parameters:
       validation_split: 0.2
       input_shape: [224, 224, 3]
@@ -24,9 +26,14 @@ steps:
   evaluate_model:
     source:
       name: evaluate_classifier
+      file: src/domain/steps/mlflow_evaluator.py
+    parameters:
+      input_shape: [224, 224, 3]
+      batch_size: 4
   deployment_trigger:
     source:
       name: deployment_trigger
+      file: src/domain/steps/deployment_trigger.py
     parameters:
       seiling: 0.5
   model_deployer:

@@ -3,15 +3,18 @@ steps:
   inference_data_loader:
     source:
       name: inference_data_loader
+      file: src/domain/steps/data_loader.py
     parameters:
       data_path: "./test_data"
       target_shape: [224, 224, 3]
   prediction_service_loader:
     source:
       name: prediction_service_loader
+      file: src/domain/steps/service_loader.py
     parameters:
       pipeline_name: "training_pipeline"
       pipeline_step_name: "mlflow_model_deployer_step"
   predictor:
     source:
       name: predictor
+      file: src/domain/steps/predictor.py

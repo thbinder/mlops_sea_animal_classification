@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from fastapi import FastAPI, File, UploadFile
+
 from src.domain.class_mapping import class_mapping
 
 logging.basicConfig(
