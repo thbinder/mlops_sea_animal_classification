@@ -40,7 +40,7 @@ You can then safely navigate to localhost:8080 to connect to your Jenkins deploy
 
 To make the current Jenkinsfile work, you will need to create a set of credentials for your registry. We use DockerHub for conveniance and an associated access token for Jenkins [used through the Credentials Plugin](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/injecting-secrets).
 
-🐳 ZenML Stack (local)
+🤖 ZenML Stack (local)
 -------------
 
 Set Up (or reset) the default ZenML Stack, then update it to use a local mlflow server as experiment tracker and model deployer, as well as evidently as data validator. You will need to fill in the mlflow username & password you set up for your mlflow deployment. If you used the docker-compose file from this repository, you can leave it blank.
@@ -73,7 +73,7 @@ docker run <IMAGE_NAME> -p 8080:127.0.0.1:8080
 🗃 Project Organization
 ------------
 
-The `exploration` folder contains the different visualisation and experimentation notebooks that can be needed during the exploration process. I have added an example which leverages the features of an mlflow server. You can setup your own in whichever way you like and change the tracking uri so that the notebook sends data to the correct location.
+The `exploration` folder contains the different visualisation and experimentation notebooks that can be needed during the exploration process.
 
 The `src` folder should contain actual production code.
 - `io`: should contain any I/O-related script: reading from and writing to S3 buckets, file conversions, reading a `.json` file. It covers interactions with the outside world.
