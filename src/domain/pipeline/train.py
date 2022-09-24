@@ -3,15 +3,16 @@ import warnings
 from cgitb import enable
 from pathlib import Path
 from typing import List
-from dotenv import load_dotenv
 
 import mlflow
 import pandas as pd
 import tensorflow as tf
 from absl import logging as absl_logging
+from dotenv import load_dotenv
 from keras_preprocessing.image import ImageDataGenerator
 from sklearn.model_selection import train_test_split
 from zenml.integrations.mlflow.mlflow_step_decorator import enable_mlflow
+from zenml.integrations.mlflow.steps import mlflow_model_deployer_step
 from zenml.pipelines import pipeline
 from zenml.steps import BaseStepConfig, Output, step
 
@@ -19,6 +20,7 @@ from src.domain.model import build_model
 
 warnings.filterwarnings("ignore")
 absl_logging.set_verbosity(-10000)
+
 
 class ImageDataLoderSetConfig(BaseStepConfig):
     """Data Loading params"""
@@ -41,6 +43,12 @@ class TrainClassifierSetConfig(BaseStepConfig):
     loss: str = "categorical_crossentropy"
     nb_epochs: int = 2
     seed: int = 42
+
+
+class DeploymentTriggerConfig(BaseStepConfig):
+    """Deployment Trigger params"""
+
+    seiling: float = 0.9
 
 
 @step
@@ -154,12 +162,26 @@ def evaluate_classifier(
     return results[1] * 100
 
 
+@step
+def deployment_trigger(config: DeploymentTriggerConfig, test_acc: float) -> bool:
+    """Only deploy if the global test accuracy > 50%."""
+    return test_acc > config.seiling
+
+
 @pipeline
-def training_pipeline(load_data, train_model, evaluate_model):
+def training_pipeline(
+    load_data,
+    train_model,
+    evaluate_model,
+    deployment_trigger=deployment_trigger(),
+    model_deployer=mlflow_model_deployer_step(),
+):
 
     load_dotenv()
     train_df, test_df = load_data()
     model = train_model(train_df)
     test_acc = evaluate_model(model, test_df)
+    deployment_decision = deployment_trigger(test_acc)
+    model_deployer(deployment_decision, model)
 
     return test_acc

@@ -24,3 +24,11 @@ steps:
   evaluate_model:
     source:
       name: evaluate_classifier
+  deployment_trigger:
+    source:
+      name: deployment_trigger
+    parameters:
+      seiling: 0.5
+  model_deployer:
+    source:
+      name: mlflow_model_deployer_step

@@ -1,1 +1,1 @@
-pdm run zenml pipeline run src/domain/pipeline/pipeline.py -c config/pipeline/training_config.yaml
+pdm run zenml pipeline run src/domain/pipeline/train.py -c config/pipeline/training_config.yaml

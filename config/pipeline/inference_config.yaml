@@ -1,0 +1,17 @@
+name: inference_pipeline
+steps:
+  inference_data_loader:
+    source:
+      name: inference_data_loader
+    parameters:
+      data_path: "./test_data"
+      target_shape: [224, 224, 3]
+  prediction_service_loader:
+    source:
+      name: prediction_service_loader
+    parameters:
+      pipeline_name: "training_pipeline"
+      pipeline_step_name: "mlflow_model_deployer_step"
+  predictor:
+    source:
+      name: predictor

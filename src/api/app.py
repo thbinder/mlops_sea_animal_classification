@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from fastapi import FastAPI, File, UploadFile
+from src.domain.class_mapping import class_mapping
 
 logging.basicConfig(
     level=logging.INFO,
@@ -15,28 +16,6 @@ logger = logging.getLogger(__name__)
 MODEL = tf.keras.models.load_model("./exploration/model/tfmodel")
 
 app = FastAPI()
-
-class_mapping = {
-    0: "Corals",
-    1: "Crabs",
-    2: "Dolphin",
-    3: "Eel",
-    4: "Jelly Fish",
-    5: "Lobster",
-    6: "Nudibranchs",
-    7: "Octopus",
-    8: "Penguin",
-    9: "Puffers",
-    10: "Sea Rays",
-    11: "Sea Urchins",
-    12: "Seahorse",
-    13: "Seal",
-    14: "Sharks",
-    15: "Squid",
-    16: "Starfish",
-    17: "Turtle_Tortoise",
-    18: "Whale",
-}
 
 
 @app.get("/ping")

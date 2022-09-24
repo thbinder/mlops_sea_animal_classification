@@ -1,2 +1,0 @@
-pdm run zenml experiment-tracker register mlflow_experiment_tracker --flavor=mlflow --tracking_username=minio --tracking_password=minio123 --tracking_uri=http://localhost:5000
-pdm run zenml stack update default -e mlflow_experiment_tracker
