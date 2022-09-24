@@ -1,0 +1,32 @@
+name: training_pipeline
+steps:
+  load_data:
+    source:
+      name: train_data_loader
+      file: src/domain/steps/data_loader.py
+    parameters:
+      test_size: 0.2
+      data_path: './data'
+      seed: 42
+  train_model:
+    source:
+      name: train_classifier
+      file: src/domain/steps/mlflow_trainer.py
+    parameters:
+      validation_split: 0.2
+      input_shape: [224, 224, 3]
+      dense_layers: [256, 256, 19]
+      dropout_layers: [0.2, 0.2]
+      batch_size: 4
+      adam_param: 0.00001
+      metrics: ["accuracy"]
+      loss: "categorical_crossentropy"
+      nb_epochs: 2
+      seed: 42
+  evaluate_model:
+    source:
+      name: evaluate_classifier
+      file: src/domain/steps/mlflow_evaluator.py
+    parameters:
+      input_shape: [224, 224, 3]
+      batch_size: 4

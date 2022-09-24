@@ -1,10 +1,6 @@
 # ml
+.zen
 mlruns
-outputs
-exploration/mlruns
-exploration/checkpoint
-exploration/*.index
-exploration/*.data*
 
 # data
 data/
