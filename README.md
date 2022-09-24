@@ -38,21 +38,30 @@ docker-compose up -d --build
 
 You can then safely navigate to localhost:8080 to connect to your Jenkins deployment and setup your pipeline if it wasn't previously configured. If you are having a plugin issue, just navigate to localhost:8080/restart.
 
-To make the current Jenkinsfile work, you will need to create a set of credentials for your registry. Here we use DockerHub and an associated access token for Jenkins [used through the Credentials Plugin](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/injecting-secrets).
+To make the current Jenkinsfile work, you will need to create a set of credentials for your registry. We use DockerHub for conveniance and an associated access token for Jenkins [used through the Credentials Plugin](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/injecting-secrets).
 
 🐳 ZenML Stack (local)
 -------------
 
-Set Up (or reset) the default ZenML Stack
+Set Up (or reset) the default ZenML Stack, then update it to use a local mlflow server as experiment tracker and model deployer, as well as evidently as data validator. You will need to fill in the mlflow username & password you set up for your mlflow deployment. If you used the docker-compose file from this repository, you can leave it blank.
 ```
 ./scripts/reset_zenml.sh
+./scripts/register_update_local_stack.sh
 ```
-Run the training pipeline
+Run a first training pipeline
 ```
 ./scripts/run_training_pipeline.sh
 ```
+Train & deploy with MLFlow your first model
+```
+./scripts/run_train_continuous_deployment_pipeline.sh
+```
+Run an inference pipeline, loading every images located in `./test_data`
+```
+./scripts/run_inference_pipeline.sh
+```
 
-🐳 Deployment (local)
+🐳 Docker API Model Deployment (local)
 -------------
 
 Build and Run Docker image

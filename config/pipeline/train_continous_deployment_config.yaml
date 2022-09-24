@@ -1,4 +1,4 @@
-name: training_pipeline
+name: train_continuous_deployment_pipeline
 steps:
   load_data:
     source:
@@ -8,6 +8,13 @@ steps:
       test_size: 0.2
       data_path: './data'
       seed: 42
+  skew_detector:
+    source:
+      name: evidently_skew_detector
+    parameters:
+      step_name: "evidently_skew_detector"
+      ignored_cols: ["Filepath"]
+      profile_sections: ["datadrift"]
   train_model:
     source:
       name: train_classifier
@@ -30,3 +37,12 @@ steps:
     parameters:
       input_shape: [224, 224, 3]
       batch_size: 4
+  deployment_trigger:
+    source:
+      name: deployment_trigger
+      file: src/domain/steps/deployment_trigger.py
+    parameters:
+      seiling: 0.5
+  model_deployer:
+    source:
+      name: mlflow_model_deployer_step

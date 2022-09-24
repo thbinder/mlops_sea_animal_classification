@@ -16,6 +16,7 @@ dependencies = [
     "mlserver-mlflow==0.5.3",
     "itsdangerous==2.0.1",
     "werkzeug==2.0.3",
+    "evidently==0.1.52dev0",
 ]
 requires-python = "==3.8.10"
 license = {text = "MIT"}
