@@ -1,7 +1,7 @@
 [project]
-name = "ML_PROJECT_EXAMPLE"
+name = "sea_animal_classification"
 version = "0.1"
-description = "ML Project Template for Python"
+description = "An MLOps example of a Sea Animal classification computer vision problem."
 authors = [
     {name = "Thomas Binder", email = ""},
 ]

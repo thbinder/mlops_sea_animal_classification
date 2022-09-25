@@ -1,6 +1,6 @@
 # Machine Learning Project Template
 
-This projects aims to provide the basic skeleton for a well-configured work repository. Each time you start a new project, one can copy this structure to gain time and work better, harder, faster and stronger 🤖
+This projects aims to provide the basic skeleton for a well-configured work repository. It focuses on a simple computer vision problem of classifying a few sea animals. 
 
 ## Getting started with this template
 
@@ -8,9 +8,7 @@ You can use this following lines to start a new project:
 ```
 ./scripts/setup.sh
 ```
-The setup script will ensure pipx and pdm are installed with your current python version. Then, it will run the command pdm install which basically sets you up for working with the repo. Then, you can complete the information about your project and delete all the previous lines within the pyproject.toml. At least change name, description and authors... 
-
-Alternatively, you can install [PDM](https://github.com/pdm-project/pdm) the way you prefer.
+The setup script will ensure pipx and pdm are installed with your current python version. Then, it will run the command pdm install which basically sets you up for working with the repo. Alternatively, you can install [PDM](https://github.com/pdm-project/pdm) the way you prefer.
 
 To run basic duties locally you can simply try out the following commands:
 ```
