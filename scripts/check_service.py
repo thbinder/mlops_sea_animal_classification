@@ -5,7 +5,7 @@ from zenml.repository import Repository
 repo = Repository()
 model_deployer = repo.active_stack.model_deployer
 services = model_deployer.find_model_server(
-    pipeline_name="training_pipeline",
+    pipeline_name="train_continuous_deployment_pipeline",
     pipeline_step_name="mlflow_model_deployer_step",
     running=True,
 )

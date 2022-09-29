@@ -115,7 +115,6 @@ def clean_experiments(ctx):
     ctx.run("rm -rf ./mlruns*")
     ctx.run("rm -rf ./outputs*")
     ctx.run("rm -rf ./exploration/checkpoint*")
-    ctx.run("rm -rf ./exploration/*data*")
     ctx.run("rm -rf ./exploration/*index*")
     ctx.run("rm -rf ./exploration/mlruns")
     ctx.run("rm -rf ./exploration/model")

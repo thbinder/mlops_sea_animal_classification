@@ -12,7 +12,7 @@ steps:
       name: prediction_service_loader
       file: src/domain/steps/service_loader.py
     parameters:
-      pipeline_name: "training_pipeline"
+      pipeline_name: "train_continuous_deployment_pipeline"
       pipeline_step_name: "mlflow_model_deployer_step"
   predictor:
     source:

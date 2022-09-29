@@ -1,0 +1,6 @@
+.venv/
+tests/
+test_data/
+scripts/
+exploration/
+config/

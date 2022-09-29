@@ -1,0 +1,1 @@
+pdm run zenml pipeline run src/domain/pipeline/training_kubeflow.py -c config/pipeline/training_kubeflow_config.yaml

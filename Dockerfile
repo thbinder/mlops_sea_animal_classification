@@ -26,9 +26,12 @@ RUN apt-get install -y libopencv-features2d-dev
 # retrieve packages from build stage
 ENV PYTHONPATH=/project/pkgs
 COPY --from=builder /project/__pypackages__/3.8/lib /project/pkgs
+COPY --from=builder /project/src /project/src
+COPY ./config /project/config
 # TODO: Should be retrieved from an artifact registry
-COPY exploration/model /exploration/model/
-
+# COPY exploration/model /exploration/model/
+RUN pip uninstall dataclasses -y
+WORKDIR /project
 
 # set command/entrypoint, adapt to fit your needs
 # to override, run docker run -it --entrypoint=/bin/bash $image 

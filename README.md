@@ -64,6 +64,16 @@ Run an inference pipeline, loading every images located in `./test_data`
 ./scripts/run_inference_pipeline.sh
 ```
 
+🐳 Kubeflow Orchestrator (local)
+-------------
+
+Ensure you deployed Kubeflow pipelines, refer to infra/kubeflow. Afterwards, you can simply register and update the right stack components, then run your training script. ZenML will dynamically look for the local Dockerfile and use it as basis for the pipeline environment to be sent to Kubeflow.
+```
+pdm export -o docker_pipeline_parents/requirements.txt --without-hashes
+./scripts/update_full_stack.sh
+./scripts/run_training_pipeline.sh
+```
+
 🐳 Docker API Model Deployment (local)
 -------------
 

@@ -1,0 +1,4 @@
+mirrors:
+  localhost:8000:
+    endpoint:
+    - http://k3d-zenml-kubeflow-registry.localhost:8000

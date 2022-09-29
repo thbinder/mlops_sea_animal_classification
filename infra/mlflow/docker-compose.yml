@@ -27,6 +27,7 @@ services:
             /tmp/wait-for-it.sh minio:9000 &&
             /usr/bin/mc alias set minio http://minio:9000 ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY} &&
             /usr/bin/mc mb minio/mlflow;
+            /usr/bin/mc mb minio/mlops-artifact-store;
             exit 0;
             "
         volumes:
@@ -61,6 +62,7 @@ services:
             - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
             - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
         command: mlflow server --backend-store-uri mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE} --default-artifact-root s3://mlflow/ --host 0.0.0.0
+        # command: mlflow server --backend-store-uri mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE} --artifacts-destination s3://mlflow/mlartifacts --serve-artifacts --host 0.0.0.0
 
 volumes:
     dbdata:
