@@ -13,7 +13,7 @@ class EvaluateClassifierConfig(BaseStepConfig):
     batch_size: int = 4
 
 
-@step
+@step(enable_cache=False)
 def evaluate_classifier(
     config: EvaluateClassifierConfig, model: tf.keras.Model, test_df: pd.DataFrame
 ) -> Output(test_acc=float):

@@ -48,7 +48,7 @@ docker_config = DockerConfiguration(
 )
 
 
-@pipeline(docker_configuration=docker_config)
+@pipeline(docker_configuration=docker_config, enable_cache=False)
 def training_kubeflow_pipeline(
     load_data,
     train_model,

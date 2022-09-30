@@ -7,7 +7,7 @@ class DeploymentTriggerConfig(BaseStepConfig):
     seiling: float = 0.9
 
 
-@step
+@step(enable_cache=False)
 def deployment_trigger(config: DeploymentTriggerConfig, test_acc: float) -> bool:
     """Only deploy if the global test accuracy > 50%."""
     return test_acc > config.seiling

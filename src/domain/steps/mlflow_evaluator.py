@@ -16,7 +16,7 @@ class EvaluateClassifierConfig(BaseStepConfig):
 
 
 @enable_mlflow
-@step
+@step(enable_cache=False)
 def evaluate_classifier(
     config: EvaluateClassifierConfig, model: tf.keras.Model, test_df: pd.DataFrame
 ) -> Output(test_acc=float):

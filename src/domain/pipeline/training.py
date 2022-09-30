@@ -14,7 +14,7 @@ warnings.filterwarnings("ignore")
 absl_logging.set_verbosity(-10000)
 
 
-@pipeline()
+@pipeline(enable_cache=False)
 def training_pipeline(
     load_data,
     train_model,

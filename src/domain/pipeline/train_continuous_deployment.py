@@ -16,7 +16,7 @@ warnings.filterwarnings("ignore")
 absl_logging.set_verbosity(-10000)
 
 
-@pipeline
+@pipeline(enable_cache=False)
 def train_continuous_deployment_pipeline(
     load_data,
     skew_detector,

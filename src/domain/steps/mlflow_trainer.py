@@ -26,7 +26,7 @@ class TrainClassifierConfig(BaseStepConfig):
 
 
 @enable_mlflow
-@step
+@step(enable_cache=False)
 def train_classifier(
     config: TrainClassifierConfig,
     train_df: pd.DataFrame,

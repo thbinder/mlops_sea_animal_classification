@@ -5,7 +5,7 @@ from zenml.steps import Output, step
 from src.domain.class_mapping import class_mapping
 
 
-@step
+@step(enable_cache=False)
 def predictor(
     service: BaseService,
     data: np.ndarray,

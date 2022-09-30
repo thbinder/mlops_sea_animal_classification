@@ -7,7 +7,7 @@ warnings.filterwarnings("ignore")
 absl_logging.set_verbosity(-10000)
 
 
-@pipeline
+@pipeline(enable_cache=False)
 def inference_pipeline(
     inference_data_loader,
     prediction_service_loader,
