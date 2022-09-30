@@ -49,12 +49,12 @@ docker_config = DockerConfiguration(
 
 
 @pipeline(docker_configuration=docker_config)
-def training_pipeline(
+def training_kubeflow_pipeline(
     load_data,
     train_model,
     evaluate_model,
     deployment_trigger,
-    skew_detector
+    skew_detector,
 ):
 
     load_dotenv()
@@ -69,7 +69,7 @@ def training_pipeline(
 
 if __name__ == "__main__":
 
-    pipeline = training_pipeline(
+    pipeline = training_kubeflow_pipeline(
         load_data=train_data_loader(),
         skew_detector=evidently_skew_detector(),
         train_model=train_classifier(),

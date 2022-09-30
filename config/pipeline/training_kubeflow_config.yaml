@@ -1,4 +1,4 @@
-name: training_pipeline
+name: training_kubeflow_pipeline
 steps:
   load_data:
     source:

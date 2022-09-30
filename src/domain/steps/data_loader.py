@@ -76,6 +76,9 @@ def inference_data_loader(
         + list(data_dir.glob(r"**/*.PNG"))
     )
 
+    print("Inference pipeline will run on the following images:")
+    print(filepaths)
+
     first_image_flag = True
     for img_path in filepaths:
 
