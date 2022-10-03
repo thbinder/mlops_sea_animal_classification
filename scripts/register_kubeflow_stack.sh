@@ -17,5 +17,7 @@ pdm run zenml stack up
 pdm run zenml container-registry update local_container_registy --uri=k3d-zenml-kubeflow-registry.localhost:8000
 pdm run zenml stack update kubeflow_local_stack -c local_container_registy
 pdm run zenml stack up
-echo "!!! Make sure REGISTRY FILE is updated!                       !!!"
 echo "!!! Make sure Docker Desktop .docker/config.json was deleted! !!!"
+echo "!!!      Make /etc/hosts linux & windows correctly set        !!!"
+echo "!!!    With both registry & registry.localhost addresses      !!!"
+echo "!!!       Make sure Docker Desktop is running with V2         !!!"

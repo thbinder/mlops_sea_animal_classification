@@ -80,7 +80,7 @@ pdm export -o docker_pipeline_parents/requirements.txt --without-hashes
 Build and Run Docker image
 ```
 docker build -t <IMAGE_NAME> .
-docker run <IMAGE_NAME> -p 8080:127.0.0.1:8080
+docker run -p 8080:8080 <IMAGE_NAME>
 ```
 
 🗃 Project Organization

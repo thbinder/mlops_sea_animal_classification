@@ -58,4 +58,4 @@ Install k3d
 wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 ```
 
-Register your stack, update it and build it according to ZenML documentation. In case there is a problem resolving your local registry, use the k3d_registry.yaml provided and update your zenml kubeflow config in .config/zenml/kubeflow/uiid/
+Register your stack, update it and build it according to ZenML documentation.

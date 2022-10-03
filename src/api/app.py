@@ -14,7 +14,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-MODEL = tf.keras.models.load_model("./exploration/model/tfmodel")
+MODEL = tf.keras.models.load_model("./model")
 
 app = FastAPI()
 

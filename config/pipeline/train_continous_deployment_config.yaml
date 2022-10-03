@@ -28,7 +28,7 @@ steps:
       adam_param: 0.00001
       metrics: ["accuracy"]
       loss: "categorical_crossentropy"
-      nb_epochs: 20
+      nb_epochs: 10
       seed: 42
       allow_gpu: True
       memory_limit: 6144
