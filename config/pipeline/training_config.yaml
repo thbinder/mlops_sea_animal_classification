@@ -23,6 +23,8 @@ steps:
       loss: "categorical_crossentropy"
       nb_epochs: 2
       seed: 42
+      allow_gpu: False
+      memory_limit: 0
   evaluate_model:
     source:
       name: evaluate_classifier

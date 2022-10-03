@@ -24,12 +24,14 @@ steps:
       input_shape: [224, 224, 3]
       dense_layers: [256, 256, 19]
       dropout_layers: [0.2, 0.2]
-      batch_size: 4
+      batch_size: 16
       adam_param: 0.00001
       metrics: ["accuracy"]
       loss: "categorical_crossentropy"
-      nb_epochs: 2
+      nb_epochs: 20
       seed: 42
+      allow_gpu: True
+      memory_limit: 6144
   evaluate_model:
     source:
       name: evaluate_classifier
@@ -42,7 +44,7 @@ steps:
       name: deployment_trigger
       file: src/domain/steps/deployment_trigger.py
     parameters:
-      seiling: 0.5
+      seiling: 0.8
   model_deployer:
     source:
       name: mlflow_model_deployer_step
