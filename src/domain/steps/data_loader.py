@@ -2,13 +2,11 @@ import os
 from pathlib import Path
 from typing import List
 
-import cv2
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from zenml.steps import BaseStepConfig, Output, step
-
-from src.domain.model import build_model
+import tensorflow as tf
 
 
 class TrainDataLoderConfig(BaseStepConfig):
@@ -60,13 +58,13 @@ def inference_data_loader(
     """Load some inference data."""
 
     def load_and_preprocess_image(img_path):
-        img = cv2.imread(img_path, 0)
-        img = cv2.resize(img, (config.target_shape[0], config.target_shape[1]))
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        img = np.array(img, dtype=np.float32).reshape(
-            1, config.target_shape[0], config.target_shape[1], config.target_shape[2]
+        buff = tf.io.read_file(img_path)
+        buff = tf.io.decode_image(
+            buff, channels=3, dtype=tf.dtypes.uint8, expand_animations=True
         )
-        return img
+        buff = tf.image.resize(buff, [224, 224])
+        tensor = tf.reshape(buff, [1, 224, 224, 3])
+        return tensor
 
     data_dir = Path(config.data_path)
     filepaths = (

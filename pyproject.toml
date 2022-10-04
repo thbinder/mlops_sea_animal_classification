@@ -6,7 +6,6 @@ authors = [
     {name = "Thomas Binder", email = ""},
 ]
 dependencies = [
-    "opencv-python>=4.5.4.60",
     "zenml>=0.13.2",
     "tensorflow==2.8.0",
     "tensorflow-io==0.24.0",

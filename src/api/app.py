@@ -1,6 +1,6 @@
 import logging
+import os
 
-import cv2
 import numpy as np
 import tensorflow as tf
 from fastapi import FastAPI, File, UploadFile
@@ -15,6 +15,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 MODEL = tf.keras.models.load_model("./model")
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 app = FastAPI()
 
@@ -26,8 +27,6 @@ async def ping():
 
 @app.post("/predict", status_code=200)
 async def predict(file: UploadFile = File(...)):
-    def resize(image):
-        return cv2.resize(image, (224, 224))
 
     # Retrieve input file
     img = await file.read()
@@ -35,19 +34,18 @@ async def predict(file: UploadFile = File(...)):
 
     # Prepare Data
     try:
-        img = np.frombuffer(img, np.uint8)
-        img = cv2.imdecode(img, cv2.IMREAD_COLOR)
-        img = resize(img)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        img = np.array(img, dtype=np.float32).reshape(1, 224, 224, 3)
-        logger.info("File pre processed.")
+        buff = tf.io.decode_image(
+            img, channels=3, dtype=tf.dtypes.uint8, expand_animations=True
+        )
+        tensor = tf.image.resize(buff, [224, 224])
+        tensor = tf.reshape(tensor, [1, 224, 224, 3])
     except Exception as e:
         logger.error("Impossible to prepare input: {}".format(e))
         return {"status_code": 400, "error": "Unable to parse request body"}
 
     # Predict class
     try:
-        preds = MODEL.predict(img)
+        preds = MODEL.predict(tensor)
         label = np.argmax(preds)
         logger.info("Predictions Ready.")
     except Exception as e:

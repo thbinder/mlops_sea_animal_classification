@@ -17,24 +17,24 @@ from src.domain.steps.evaluator import evaluate_classifier
 from src.domain.steps.skew_detector import evidently_skew_detector
 from src.domain.steps.trainer import train_classifier
 
-original = KubeflowOrchestrator._configure_container_op
+# original = KubeflowOrchestrator._configure_container_op
 
 
-def patch_container_op(container_op):
-    original(container_op)
-    container_op.container.add_env_variable(
-        k8s_client.V1EnvVar(name="ZENML_RUN_NAME", value="{{workflow.name}}")
-    )
+# def patch_container_op(container_op):
+#     original(container_op)
+#     container_op.container.add_env_variable(
+#         k8s_client.V1EnvVar(name="ZENML_RUN_NAME", value="{{workflow.name}}")
+#     )
 
 
-KubeflowOrchestrator._configure_container_op = staticmethod(patch_container_op)
+# KubeflowOrchestrator._configure_container_op = staticmethod(patch_container_op)
 
 
-def patch_get_run_name(self, pipeline_name):
-    return os.getenv("ZENML_RUN_NAME")
+# def patch_get_run_name(self, pipeline_name):
+#     return os.getenv("ZENML_RUN_NAME")
 
 
-KubeflowEntrypointConfiguration.get_run_name = patch_get_run_name
+# KubeflowEntrypointConfiguration.get_run_name = patch_get_run_name
 
 # Configure warnings
 warnings.filterwarnings("ignore")
@@ -42,9 +42,9 @@ absl_logging.set_verbosity(-10000)
 
 # Specify docker configuration of pipeline
 docker_config = DockerConfiguration(
-    dockerfile="./infra/zenml_parent/Dockerfile",
+    dockerfile="./infra/zenml/Dockerfile",
     build_context_root="./",
-    requirements="./infra/zenml_parent/requirements.txt",
+    requirements="./infra/zenml/requirements.txt",
 )
 
 

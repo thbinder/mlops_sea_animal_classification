@@ -35,10 +35,10 @@ def train_classifier(
 ) -> Output(model=tf.keras.Model):
 
     # Check if GPU available
-    print("GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
+    print("GPUs Available: ", len(tf.config.list_physical_devices("GPU")))
     print("GPUs allowed: {}".format(config.allow_gpu))
     print("GPUS memory limit: {} MB".format(config.memory_limit))
-    gpus = tf.config.list_physical_devices('GPU')
+    gpus = tf.config.list_physical_devices("GPU")
 
     if gpus:
 
@@ -46,8 +46,8 @@ def train_classifier(
             print("GPUs not allowed for this run. Disabling...")
             try:
                 # Disable first GPU
-                tf.config.set_visible_devices(gpus[1:], 'GPU')
-                logical_devices = tf.config.list_logical_devices('GPU')
+                tf.config.set_visible_devices(gpus[1:], "GPU")
+                logical_devices = tf.config.list_logical_devices("GPU")
                 # Logical device was not created for first GPU
                 assert len(logical_devices) == len(gpus) - 1
                 print("Tensorflow visible GPU: {}".format(len(logical_devices)))
@@ -56,13 +56,18 @@ def train_classifier(
                 print("Impossible to disable first GPU: {}".format(e))
                 pass
         else:
-        # Restrict TensorFlow to only allocate certain amount of memory on the first GPU
+            # Restrict TensorFlow to only allocate certain amount of memory on the first GPU
             print("GPUs allowed for this run. Setting memory limit...")
             try:
                 tf.config.experimental.set_virtual_device_configuration(
                     gpus[0],
-                    [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=config.memory_limit)])
-                logical_gpus = tf.config.experimental.list_logical_devices('GPU')
+                    [
+                        tf.config.experimental.VirtualDeviceConfiguration(
+                            memory_limit=config.memory_limit
+                        )
+                    ],
+                )
+                logical_gpus = tf.config.experimental.list_logical_devices("GPU")
                 print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
             except Exception as e:
                 # Virtual devices must be set before GPUs have been initialized
