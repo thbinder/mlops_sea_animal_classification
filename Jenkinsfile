@@ -4,11 +4,12 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'python:3.8.10'
+                    image 'thomasbinder/sea_animals_api:0.1'
                 }
             }
             steps {
-                sh 'pytest -c config/pytest.ini tests'
+                sh 'make test'
+                sh 'make coverage'
             }
         }
         stage('Build') {
