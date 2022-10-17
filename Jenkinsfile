@@ -5,7 +5,7 @@ pipeline {
             agent any
             steps {
                 sh 'ls -l'
-                sh 'make test'
+                sh 'pytest -c config/pytest.ini tests'
             }
         }
         stage('Build') {
