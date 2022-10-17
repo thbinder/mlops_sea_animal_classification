@@ -28,7 +28,7 @@ steps:
       adam_param: 0.00001
       metrics: ["accuracy"]
       loss: "categorical_crossentropy"
-      nb_epochs: 10
+      nb_epochs: 2
       seed: 42
       allow_gpu: True
       memory_limit: 6144
@@ -38,7 +38,7 @@ steps:
       file: src/domain/steps/mlflow_evaluator.py
     parameters:
       input_shape: [224, 224, 3]
-      batch_size: 4
+      batch_size: 16
   deployment_trigger:
     source:
       name: deployment_trigger

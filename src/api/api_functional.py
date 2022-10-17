@@ -2,6 +2,7 @@ import logging
 import os
 
 import numpy as np
+import requests
 import tensorflow as tf
 from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
@@ -16,9 +17,6 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 logger = logging.getLogger(__name__)
-
-# Loading model
-MODEL = tf.keras.models.load_model("./model")
 
 # App definition
 app = FastAPI(
@@ -48,7 +46,7 @@ async def ping():
     return {"message": "pong!"}
 
 
-@app.post("/predict", status_code=200)
+@app.post("/v1/predict", status_code=200)
 async def predict(
     file: UploadFile = File(...), credentials: HTTPBasicCredentials = Depends(security)
 ):
@@ -72,13 +70,16 @@ async def predict(
         logger.error("Impossible to prepare input: {}".format(e))
         return {"status_code": 400, "error": "Unable to parse request body"}
 
-    # Predict class of image
     try:
-        preds = MODEL.predict(tensor)
-        label = np.argmax(preds)
-        logger.info("Predictions Ready.")
+        r = requests.post(
+            url="http://host.docker.internal:8000/invocations",
+            json={"instances": tensor.numpy().tolist()},
+        )
     except Exception as e:
-        logger.error("Impossible to make predictions: {}".format(e))
-        return {"status_code": 400, "error": "Unable to make predictions"}
+        logger.error("Impossible to make request to service: {}".format(e))
+        return {"status_code": 400, "error": "Unable to make request to service"}
+
+    label = np.argmax(r.json())
+    logger.info("Predictions Ready.")
 
     return {"class label": str(class_mapping[label])}
