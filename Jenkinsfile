@@ -11,11 +11,11 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'docker/compose:debian-1.29.2'
+                    image 'docker/compose:1.29.2'
                 }
             }
             steps {
-                sh 'docker-compose -f ./tests_integration/docker-compose.yml up --build'
+                sh 'cd ./tests_integration/ && ls -l && ./start.sh'
             }
         }
         stage('Push') {
