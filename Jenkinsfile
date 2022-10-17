@@ -9,7 +9,11 @@ pipeline {
             }
         }
         stage('Test') {
-            agent any
+            agent {
+                docker {
+                    image 'docker/compose:latest'
+                }
+            }
             steps {
                 sh 'cd ./tests_integration/ && ./start.sh'
             }
