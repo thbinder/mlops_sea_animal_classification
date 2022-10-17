@@ -9,12 +9,7 @@ pipeline {
             }
         }
         stage('Test') {
-            agent {
-                docker {
-                    image 'docker/compose:latest'
-                    args '--privileged'
-                }
-            }
+            agent any
             steps {
                 sh 'docker version'
                 sh 'docker-compose version'
