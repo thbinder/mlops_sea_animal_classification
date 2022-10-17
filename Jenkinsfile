@@ -1,13 +1,6 @@
 pipeline {
     agent none
     stages {
-        stage('Test') {
-            agent any
-            steps {
-                sh 'ls -l'
-                sh 'pytest -c config/pytest.ini tests'
-            }
-        }
         stage('Build') {
             agent any
             steps {
