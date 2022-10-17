@@ -13,7 +13,7 @@ def test_ping():
 
 def test_predict_without_authentication():
 
-    _test_upload_file = "./test_data/nudibranch.jpg"
+    _test_upload_file = "./tests_data/nudibranch.jpg"
     response = client.post(
         "/predict",
         files={"file": ("filename", open(_test_upload_file, "rb"), "image/jpeg")},
@@ -22,7 +22,7 @@ def test_predict_without_authentication():
 
 def test_predict_with_authentication():
 
-    _test_upload_file = "./test_data/nudibranch.jpg"
+    _test_upload_file = "./tests_data/nudibranch.jpg"
     auth = HTTPBasicAuth(username="thomas", password="thomas")
     response = client.post(
         "/predict",

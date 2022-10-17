@@ -21,7 +21,7 @@ class InferenceDataLoaderConfig(BaseStepConfig):
     """Data Loading params"""
 
     target_shape: List[int] = [224, 224, 3]
-    data_path: str = "./test_data"
+    data_path: str = "./tests_data"
 
 
 @step

@@ -17,8 +17,18 @@ services:
       - 8000:8000
 
   health:
-    build: .tests_integration/health/
+    build: ./health/
     container_name: test_health
+    networks:
+      - docker
+    environment:
+    - LOG=1
+    volumes:
+      - log-data:/logs
+  
+  predict:
+    build: ./predict/
+    container_name: test_predict
     networks:
       - docker
     environment:

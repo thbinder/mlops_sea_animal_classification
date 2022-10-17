@@ -10,13 +10,19 @@ api_address = 'api'
 api_port = 8000
 
 # Request
-r = requests.get(
-    url='http://{address}:{port}/ping'.format(address=api_address, port=api_port)
+file = {'media': open('nudibranch.jpg', 'rb')}
+r = requests.post(
+    url='http://{address}:{port}/predict'.format(address=api_address, port=api_port),
+    params= {
+        'username': 'thomas',
+        'password': 'thomas'
+    },
+    files=file
 )
 
 output = '''
 ============================
-        Health test
+        Predict test
 ============================
 
 request done at "/ping"
