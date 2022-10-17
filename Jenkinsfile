@@ -11,7 +11,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'docker:stable-dind'
+                    image 'docker:compose'
                     args '--privileged'
                 }
             }
