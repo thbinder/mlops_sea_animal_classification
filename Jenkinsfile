@@ -15,7 +15,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'sudo systemctl start docker'
+                sh 'systemctl start docker'
                 sh 'cd ./tests_integration/ && ls -l && ./start.sh'
             }
         }
