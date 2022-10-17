@@ -39,3 +39,15 @@ services:
       - api
     volumes:
       - log-data:/logs
+
+  security:
+    build: ./security/
+    container_name: test_security
+    networks:
+      - docker
+    environment:
+    - LOG=1
+    depends_on:
+      - api
+    volumes:
+      - log-data:/logs

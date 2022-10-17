@@ -6,7 +6,7 @@ from pathlib import Path
 
 from duty import duty
 
-PY_SRC_PATHS = (Path(_) for _ in ("src", "tests", "duties.py"))
+PY_SRC_PATHS = (Path(_) for _ in ("src", "tests", "tests_integration", "duties.py"))
 PY_SRC_LIST = tuple(str(_) for _ in PY_SRC_PATHS)
 PY_SRC = " ".join(PY_SRC_LIST)
 
