@@ -3,7 +3,8 @@ import os
 
 import numpy as np
 import tensorflow as tf
-from fastapi import FastAPI, File, UploadFile
+from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, status
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 from src.domain.class_mapping import class_mapping
 
@@ -17,7 +18,26 @@ logger = logging.getLogger(__name__)
 MODEL = tf.keras.models.load_model("./model")
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-app = FastAPI()
+app = FastAPI(
+    title="Sea Animal Classification API",
+    description="API for classifying sea animals.",
+    version="0.1.0",
+)
+security = HTTPBasic()
+user_db = {"thomas": "thomas"}
+
+
+def verify_user(credentials: HTTPBasicCredentials):
+    username = credentials.username
+    password = credentials.password
+
+    if not (user_db.get(username)) or not (user_db.get(username) == password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect email or password",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    return
 
 
 @app.get("/ping")
@@ -26,7 +46,13 @@ async def ping():
 
 
 @app.post("/predict", status_code=200)
-async def predict(file: UploadFile = File(...)):
+async def predict(
+    file: UploadFile = File(...), credentials: HTTPBasicCredentials = Depends(security)
+):
+    """Returns the predicted class of an image"""
+
+    # Verify credentials
+    verify_user(credentials)
 
     # Retrieve input file
     img = await file.read()

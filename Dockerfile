@@ -20,7 +20,7 @@ ENV PYTHONPATH=/project/pkgs
 COPY --from=builder /project/__pypackages__/3.8/lib /project/pkgs
 COPY --from=builder /project/src /project/src
 # TODO: Should be retrieved from an artifact registry
-COPY /model /project/model
+COPY ./model /project/model
 RUN pip uninstall dataclasses -y
 RUN rm -rf /project/pkgs/dataclasses*
 WORKDIR /project

@@ -1,11 +1,18 @@
 pipeline {
     agent none
     stages {
+        stage('Test') {
+            agent any
+            steps {
+                sh 'ls -l'
+                sh 'make test'
+            }
+        }
         stage('Build') {
             agent any
             steps {
                 sh 'ls -l'
-                sh 'docker build -t thomasbinder/ml_template:0.1 .'
+                sh 'docker build -t thomasbinder/sea_animals_api:0.1 .'
             }
         }
         stage('Push') {
@@ -14,7 +21,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_secret_key', passwordVariable: 'password', usernameVariable: 'username')]) {
                     sh 'docker login -u $username -p $password'
                 }
-                sh 'docker push thomasbinder/ml_template:0.1'
+                sh 'docker push thomasbinder/sea_animals_api:0.1'
             }
         }
     }
