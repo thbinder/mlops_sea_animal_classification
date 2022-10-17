@@ -15,7 +15,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd ./tests_integration/ && ./start.sh'
+                sh 'cd ./tests_integration/ && ls -l && ./start.sh'
             }
         }
         stage('Push') {
