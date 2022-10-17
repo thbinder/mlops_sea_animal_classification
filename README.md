@@ -1,8 +1,8 @@
-# Machine Learning Project Template
+# Sea Animals Classification
 
-This projects aims to provide the basic skeleton for a well-configured work repository. It focuses on a simple computer vision problem of classifying a few sea animals. 
+This projects aims to provide the basic skeleton for a well-configured ML work repository. It focuses on a simple computer vision problem of classifying a few sea animals. 
 
-## Getting started with this template
+## Getting started
 
 You can use this following lines to start a new project:
 ```
