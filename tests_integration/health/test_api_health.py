@@ -2,7 +2,7 @@ import os
 import requests
 import time
 
-time.sleep(10)
+time.sleep(15)
 
 # API address definition
 api_address = 'api'
