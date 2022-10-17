@@ -8,6 +8,13 @@ pipeline {
                 sh 'docker build -t thomasbinder/sea_animals_api:0.1 .'
             }
         }
+        stage('Test') {
+            agent any
+            steps {
+                sh 'cd tests_integration/'
+                sh './start.sh'
+            }
+        }
         stage('Push') {
             agent any
             steps {
