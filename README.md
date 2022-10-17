@@ -24,16 +24,18 @@ This command will give you the list of jobs you can run with the Makefile, they 
 💻 MLFlow (local)
 -------------
 
-Build and launch mlflow local server from the infra folder. For more information refer to the related readme.
+Build and launch mlflow local server from the infra folder. For more information on this service, refer to the related readme.
 ```
 cd infra/mlflow
 docker-compose up -d --build
 ```
 
+MLFlow will be deployed on localhost:5000 by default, as well as minio on localhost:9000.
+
 💻 Jenkins (local)
 -------------
 
-Build and launch jenkins local server from the infra folder. For more information refer to the related readme.
+Build and launch jenkins local server from the infra folder. For more information on this service, refer to the related readme.
 ```
 cd infra/jenkins
 docker-compose up -d --build
@@ -43,36 +45,34 @@ You can then safely navigate to localhost:8080 to connect to your Jenkins deploy
 
 To make the current Jenkinsfile work, you will need to create a set of credentials for your registry. We use DockerHub for conveniance and an associated access token for Jenkins [used through the Credentials Plugin](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/injecting-secrets).
 
-Once the pipeline has been setup correctly (providing credentials & git repository) you can build the project and create github actions.
+Once the pipeline has been setup correctly (providing credentials & git repository) you can build the project from jenkins and create github actions.
 
 🤖 ZenML Stack (local)
 -------------
 
-Set Up (or reset) the default ZenML Stack, then update it to use a local mlflow server as experiment tracker and model deployer, as well as evidently as data validator. You will need to fill in the mlflow username & password you set up for your mlflow deployment. If you used the docker-compose file from this repository, you can leave it blank.
+Set Up (or reset) the default ZenML Stack, then update it to use a local mlflow server as experiment tracker and model deployer, as well as evidently as data validator. Different stacks are available from the scripts folder. However, most of them need a prior deployment of the service needed, such as MLFow, MinIO and Vault.
 ```
 ./scripts/reset_zenml.sh
 ./scripts/register_local_stack.sh
 ```
-Run a first training pipeline
+Train & deploy your first model with MLFlow
 ```
-./scripts/run_training_pipeline.sh
-```
-Train & deploy with MLFlow your first model
-```
-./scripts/run_continuous_training_pipeline.sh
+./scripts/run_continuous_deployment_pipeline.sh
 ```
 Run an inference pipeline, loading every images located in `./tests_data`
 ```
 ./scripts/run_inference_pipeline.sh
 ```
 
-🐳 Kubeflow Orchestrator (local)
+Alternatively, you can deploy a functional API that will forward your requests directly to the deployed model. (See src/api/api_functional.py)
+
+🤖 ZenML Kubeflow Stack (local)
 -------------
 
-Ensure you deployed Kubeflow pipelines, refer to infra/kubeflow. Afterwards, you can simply register and update the right stack components, then run your training script. ZenML will dynamically look for the local Dockerfile and use it as basis for the pipeline environment to be sent to Kubeflow.
+Ensure you installed k3d (see infra/kubeflow). When running the registering script provided, ZenML with automatically setup the cluster and install kubeflow pipelines. Afterwards, you can simply run the according training script, ZenML will dynamically look for the Dockerfile in infra/zenml and use it as basis for the pipeline environment to be sent to Kubeflow.
 ```
+./scripts/register_kubeflow_stack.sh
 pdm export -o infra/zenml/requirements.txt --without-hashes
-./scripts/update_kubeflow_stack.sh
 ./scripts/run_kubeflow_training_pipeline.sh
 ```
 
@@ -85,12 +85,14 @@ docker build -t <IMAGE_NAME> .
 docker run -p 8000:8000 <IMAGE_NAME>
 ```
 
+Alternatively, if you ran a CI pipeline with jenkins, such as the one provided in this project, you can simply pull the image from your repository and run it.
+
 🗃 Project Organization
 ------------
 
 The `exploration` folder contains the different visualisation and experimentation notebooks that can be needed during the exploration process.
 
 The `src` folder should contain actual production code.
-- `io`: should contain any I/O-related script: reading from and writing to S3 buckets, file conversions, reading a `.json` file. It covers interactions with the outside world.
+- `data`: should contain any I/O-related script: reading from and writing to S3 buckets, file conversions, reading a `.json` file. It covers interactions with the outside world.
 - `domain`: contains all Python modules related to the internal workings of your code, like data cleaning, processing, formatting...This layer has no interaction with the outside world.
 - `api`: contains your main code functions, for example the `main.py` script if your code as a sole purpose. In the case of an ML project repository, `api` may contain several scripts like `app.py` which exposes a REST API to try out. The main function should be clear, concise and relay on methods defined on the `domain` directory.
