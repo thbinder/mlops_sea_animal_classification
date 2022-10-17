@@ -15,7 +15,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd ./tests_integration/ && ls -l && ./start.sh'
+                sh 'cd ./tests_integration/ && docker-compose -f ./docker-compose.yml up --build'
             }
         }
         stage('Push') {
