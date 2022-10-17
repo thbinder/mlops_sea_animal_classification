@@ -11,7 +11,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'docker:compose'
+                    image 'docker/compose:latest'
                     args '--privileged'
                 }
             }
