@@ -16,6 +16,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'service docker start'
                 sh 'docker version'
                 sh 'docker-compose version'
                 sh 'cd ./tests_integration/ && ls -l && ./start.sh'
