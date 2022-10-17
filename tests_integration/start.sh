@@ -1,1 +1,4 @@
-docker-compose -f ./docker-compose.yml up --build
+docker-compose -f ./docker-compose.yml up \
+    --abort-on-container-exit \
+    --exit-code-from predict \
+    --build

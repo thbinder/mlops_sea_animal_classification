@@ -23,6 +23,8 @@ services:
       - docker
     environment:
     - LOG=1
+    depends_on:
+      - api
     volumes:
       - log-data:/logs
   
@@ -33,5 +35,7 @@ services:
       - docker
     environment:
     - LOG=1
+    depends_on:
+      - api
     volumes:
       - log-data:/logs
