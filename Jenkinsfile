@@ -15,6 +15,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'docker start'
                 sh 'cd ./tests_integration/ && ls -l && ./start.sh'
             }
         }
