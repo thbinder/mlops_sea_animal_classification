@@ -1,17 +1,6 @@
 pipeline {
     agent none
     stages {
-        stage('Test') {
-            agent {
-                docker {
-                    image 'thomasbinder/sea_animals_api:0.1'
-                }
-            }
-            steps {
-                sh 'make test'
-                sh 'make coverage'
-            }
-        }
         stage('Build') {
             agent any
             steps {

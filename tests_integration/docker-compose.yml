@@ -1,0 +1,27 @@
+version: "3.9"
+
+networks:
+  docker:
+
+volumes:
+  log-data:
+
+services:
+
+  api:
+    image: thomasbinder/sea_animals_api:0.1
+    container_name: api
+    networks:
+      - docker
+    ports:
+      - 8000:8000
+
+  health:
+    build: .tests_integration/health/
+    container_name: test_health
+    networks:
+      - docker
+    environment:
+    - LOG=1
+    volumes:
+      - log-data:/logs
