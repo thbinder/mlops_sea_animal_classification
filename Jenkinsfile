@@ -11,7 +11,7 @@ pipeline {
         stage('Test') {
             agent any
             steps {
-                sh 'cd tests_integration/'
+                sh 'cd ./tests_integration/'
                 sh 'ls -l'
                 sh './start.sh'
             }
