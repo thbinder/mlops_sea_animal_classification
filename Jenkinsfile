@@ -12,10 +12,10 @@ pipeline {
             agent {
                 docker {
                     image 'docker:dind'
+                    args '--privileged'
                 }
             }
             steps {
-                sh 'systemctl start docker'
                 sh 'cd ./tests_integration/ && ls -l && ./start.sh'
             }
         }
