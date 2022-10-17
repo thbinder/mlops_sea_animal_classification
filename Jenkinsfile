@@ -1,6 +1,16 @@
 pipeline {
     agent none
     stages {
+        stage('Test') {
+            agent {
+                docker {
+                    image 'python:3.8.10'
+                }
+            }
+            steps {
+                sh 'pytest -c config/pytest.ini tests'
+            }
+        }
         stage('Build') {
             agent any
             steps {
