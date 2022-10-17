@@ -11,7 +11,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'docker/compose:1.29.2'
+                    image 'docker:dind'
                 }
             }
             steps {
