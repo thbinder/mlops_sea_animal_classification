@@ -11,7 +11,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'docker/compose:latest'
+                    image 'docker/compose:debian-1.29.2'
                 }
             }
             steps {
