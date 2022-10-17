@@ -43,13 +43,15 @@ You can then safely navigate to localhost:8080 to connect to your Jenkins deploy
 
 To make the current Jenkinsfile work, you will need to create a set of credentials for your registry. We use DockerHub for conveniance and an associated access token for Jenkins [used through the Credentials Plugin](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/injecting-secrets).
 
+Once the pipeline has been setup correctly (providing credentials & git repository) you can build the project and create github actions.
+
 🤖 ZenML Stack (local)
 -------------
 
 Set Up (or reset) the default ZenML Stack, then update it to use a local mlflow server as experiment tracker and model deployer, as well as evidently as data validator. You will need to fill in the mlflow username & password you set up for your mlflow deployment. If you used the docker-compose file from this repository, you can leave it blank.
 ```
 ./scripts/reset_zenml.sh
-./scripts/register_update_local_stack.sh
+./scripts/register_local_stack.sh
 ```
 Run a first training pipeline
 ```
@@ -57,9 +59,9 @@ Run a first training pipeline
 ```
 Train & deploy with MLFlow your first model
 ```
-./scripts/run_train_continuous_deployment_pipeline.sh
+./scripts/run_continuous_training_pipeline.sh
 ```
-Run an inference pipeline, loading every images located in `./test_data`
+Run an inference pipeline, loading every images located in `./tests_data`
 ```
 ./scripts/run_inference_pipeline.sh
 ```
@@ -70,8 +72,8 @@ Run an inference pipeline, loading every images located in `./test_data`
 Ensure you deployed Kubeflow pipelines, refer to infra/kubeflow. Afterwards, you can simply register and update the right stack components, then run your training script. ZenML will dynamically look for the local Dockerfile and use it as basis for the pipeline environment to be sent to Kubeflow.
 ```
 pdm export -o infra/zenml/requirements.txt --without-hashes
-./scripts/update_full_stack.sh
-./scripts/run_training_pipeline.sh
+./scripts/update_kubeflow_stack.sh
+./scripts/run_kubeflow_training_pipeline.sh
 ```
 
 🐳 Docker API Model Deployment (local)
@@ -80,7 +82,7 @@ pdm export -o infra/zenml/requirements.txt --without-hashes
 Build and Run Docker image
 ```
 docker build -t <IMAGE_NAME> .
-docker run -p 8080:8080 <IMAGE_NAME>
+docker run -p 8000:8000 <IMAGE_NAME>
 ```
 
 🗃 Project Organization
