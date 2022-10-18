@@ -1089,7 +1089,7 @@ dependencies = [
 
 [[package]]
 name = "mlflow"
-version = "1.24.0"
+version = "1.25.1"
 requires_python = ">=3.7"
 summary = "MLflow: A Platform for ML Development and Productionization"
 dependencies = [
@@ -2316,7 +2316,7 @@ dependencies = [
 
 [metadata]
 lock_version = "4.0"
-content_hash = "sha256:fc70f24c7303deefbec4bb3c4438e9f0727dddf397cffa1559cfd7e11390227f"
+content_hash = "sha256:b950673aea9e5149037147077958303c76351d9969b97a485bcbec20a2f2cd48"
 
 [metadata.files]
 "absl-py 0.11.0" = [
@@ -3540,9 +3540,9 @@ content_hash = "sha256:fc70f24c7303deefbec4bb3c4438e9f0727dddf397cffa1559cfd7e11
 "ml-pipelines-sdk 1.8.0" = [
     {url = "https://files.pythonhosted.org/packages/e7/53/75883c317fa410ea8511d73c8b4464a8ef2ccd18dea89001e3ef27edf433/ml_pipelines_sdk-1.8.0-py3-none-any.whl", hash = "sha256:fe15eae5935e136e4ddee627e91ee43d288534d46084d3578f04c417de7c0954"},
 ]
-"mlflow 1.24.0" = [
-    {url = "https://files.pythonhosted.org/packages/0b/b2/7e36d94dd6f3628766118dd58f75050122f36ffc4033457cbe2fc68ec753/mlflow-1.24.0-py3-none-any.whl", hash = "sha256:0c91eeec316b82e201b3cd6e38161625553b8e7c8bdcbe50ea3fe8fc151d9fc7"},
-    {url = "https://files.pythonhosted.org/packages/83/87/38f2ed46a6f731ef76893e073d4841284884c1865880d07f4f23382f345c/mlflow-1.24.0.tar.gz", hash = "sha256:ea167088eb87b41f111708327cf795f2994b04f96701d54fd5fd5b35a8787a7e"},
+"mlflow 1.25.1" = [
+    {url = "https://files.pythonhosted.org/packages/32/e8/997267657945b0e6fc57a466dccb8fd9693f3ff018750c26c2b4e2f6f7ea/mlflow-1.25.1.tar.gz", hash = "sha256:8c378f4516d6373f95bc57b6c7c2dca43f2650d49cee5ab6b9c3457fc46f0600"},
+    {url = "https://files.pythonhosted.org/packages/89/cb/a38a8a57ab7d0b6fa07de9e32f2dbaab953474ef6954f6cc18301cc9fafa/mlflow-1.25.1-py3-none-any.whl", hash = "sha256:68e4bf115c56528928c4917eb1d51ec204e781c075878ed9261f38e4a41b8538"},
 ]
 "mlflow-skinny 1.24.0" = [
     {url = "https://files.pythonhosted.org/packages/33/1f/7546567ea32a4611e4d7c7d5e0d9cd01eaca35e65bac07f8c19b9e05e6a3/mlflow-skinny-1.24.0.tar.gz", hash = "sha256:ad18484833bb482875ca38a46f5e2c9b8a9c4a3028f835d0d9c017af50d703d4"},

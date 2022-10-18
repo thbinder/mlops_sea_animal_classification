@@ -30,7 +30,7 @@ def evidently_skew_detector(
     profile, dashboard = EvidentlyProfileStep().entrypoint(
         reference_dataset=train_df,
         comparison_dataset=test_df,
-        config=evidently_profile_config,
+        params=evidently_profile_config,
     )
 
     return profile, dashboard
