@@ -25,7 +25,7 @@ r2 = requests.post(
 
 output = """
 ============================
-        Predict test
+        Security test
 ============================
 
 request done at "/predict"

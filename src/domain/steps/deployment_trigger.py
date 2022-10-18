@@ -1,7 +1,7 @@
-from zenml.steps import BaseStepConfig, step
+from zenml.steps import BaseParameters, step
 
 
-class DeploymentTriggerConfig(BaseStepConfig):
+class DeploymentTriggerConfig(BaseParameters):
     """Deployment Trigger params"""
 
     seiling: float = 0.9

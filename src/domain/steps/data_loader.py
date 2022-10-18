@@ -6,10 +6,10 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
-from zenml.steps import BaseStepConfig, Output, step
+from zenml.steps import BaseParameters, Output, step
 
 
-class TrainDataLoderConfig(BaseStepConfig):
+class TrainDataLoderConfig(BaseParameters):
     """Data Loading params"""
 
     test_size: float = 0.2
@@ -17,7 +17,7 @@ class TrainDataLoderConfig(BaseStepConfig):
     seed: int = 42
 
 
-class InferenceDataLoaderConfig(BaseStepConfig):
+class InferenceDataLoaderConfig(BaseParameters):
     """Data Loading params"""
 
     target_shape: List[int] = [224, 224, 3]

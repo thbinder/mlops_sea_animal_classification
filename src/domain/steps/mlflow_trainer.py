@@ -4,13 +4,12 @@ import mlflow
 import pandas as pd
 import tensorflow as tf
 from keras_preprocessing.image import ImageDataGenerator
-from zenml.integrations.mlflow.mlflow_step_decorator import enable_mlflow
-from zenml.steps import BaseStepConfig, Output, step
+from zenml.steps import BaseParameters, Output, step
 
 from src.domain.model import build_model
 
 
-class TrainClassifierConfig(BaseStepConfig):
+class TrainClassifierConfig(BaseParameters):
     """Trainer params"""
 
     validation_split: float = 0.2
@@ -27,8 +26,7 @@ class TrainClassifierConfig(BaseStepConfig):
     memory_limit: int = 0
 
 
-@enable_mlflow
-@step(enable_cache=False)
+@step(enable_cache=False, experiment_tracker="mlflow_experiment_tracker")
 def train_classifier(
     config: TrainClassifierConfig,
     train_df: pd.DataFrame,

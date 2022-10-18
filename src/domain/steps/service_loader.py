@@ -1,9 +1,9 @@
 from zenml.repository import Repository
 from zenml.services import BaseService
-from zenml.steps import BaseStepConfig, step
+from zenml.steps import BaseParameters, step
 
 
-class PredictionServiceLoaderConfig(BaseStepConfig):
+class PredictionServiceLoaderConfig(BaseParameters):
     """Prediction Loading params"""
 
     pipeline_name: str = "training_pipeline"
