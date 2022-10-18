@@ -36,4 +36,4 @@ def evaluate_classifier(
     print("Model performance on Test Set:")
     print("Accuract on Test Set: {}%".format(results[1] * 100))
 
-    return results[1] * 100
+    return results[1]

@@ -22,7 +22,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_secret_key', passwordVariable: 'password', usernameVariable: 'username')]) {
                     sh 'docker login -u $username -p $password'
                 }
-                sh 'docker push thomasbinder/sea_animals_api:0.1'
+                sh 'docker push thomasbinder/sea_animals_model_api:0.1'
             }
         }
     }

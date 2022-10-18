@@ -5,7 +5,7 @@ steps:
       name: inference_data_loader
       file: src/domain/steps/data_loader.py
     parameters:
-      data_path: "./test_data"
+      data_path: "./tests_data"
       target_shape: [224, 224, 3]
   prediction_service_loader:
     source:

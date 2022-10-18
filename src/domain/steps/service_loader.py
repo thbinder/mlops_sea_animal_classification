@@ -16,7 +16,7 @@ def prediction_service_loader(
 ) -> BaseService:
     """Load the model service of our training pipeline."""
 
-    repo = Repository(skip_repository_check=True)
+    repo = Repository()
     model_deployer = repo.active_stack.model_deployer
     services = model_deployer.find_model_server(
         pipeline_name=config.pipeline_name,

@@ -21,31 +21,30 @@ make help
 ```
 This command will give you the list of jobs you can run with the Makefile, they should be self explanatory. They include starting unit testing, checking quality, running tests, coverage and cleaning your repo from temporary files.
 
-💻 MLFlow (local)
+💻 MLFlow | MinIO | Jenkins | Vault (local)
 -------------
 
-Build and launch mlflow local server from the infra folder. For more information on this service, refer to the related readme.
+Build and launch the different services locally from the infra folder. For more information on the services, refer to the related readmes.
 ```
-cd infra/mlflow
+cd infra/<SERVICE_NAME>
 docker-compose up -d --build
 ```
 
-MLFlow will be deployed on localhost:5000 by default, as well as minio on localhost:9000.
+MLFlow will be deployed on localhost:5000. (Required to run exploration notebooks)
+Minio will be deployed on localhost:9000. (Required to run exploration notebooks)
+Jenkins will be deployed on localhost:8080. If you are having a plugin issue, just navigate to localhost:8080/restart. (Required for Continuous Integration)
+Vault will be deployed on localhost:8200 and is only needed if you plan on using the ZenML local stack.
 
-💻 Jenkins (local)
+🐳 Docker API Model Deployment (local)
 -------------
 
-Build and launch jenkins local server from the infra folder. For more information on this service, refer to the related readme.
+Build and Run Docker image
 ```
-cd infra/jenkins
-docker-compose up -d --build
+docker build -t <IMAGE_NAME> .
+docker run -p 8000:8000 <IMAGE_NAME>
 ```
 
-You can then safely navigate to localhost:8080 to connect to your Jenkins deployment and setup your pipeline if it wasn't previously configured. If you are having a plugin issue, just navigate to localhost:8080/restart.
-
-To make the current Jenkinsfile work, you will need to create a set of credentials for your registry. We use DockerHub for conveniance and an associated access token for Jenkins [used through the Credentials Plugin](https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/injecting-secrets).
-
-Once the pipeline has been setup correctly (providing credentials & git repository) you can build the project from jenkins and create github actions.
+Alternatively, if you ran a CI pipeline with jenkins, such as the one provided in this project, you can simply pull the image from your repository and run it.
 
 🤖 ZenML Stack (local)
 -------------
@@ -64,28 +63,15 @@ Run an inference pipeline, loading every images located in `./tests_data`
 ./scripts/run_inference_pipeline.sh
 ```
 
-Alternatively, you can deploy a functional API that will forward your requests directly to the deployed model. (See src/api/api_functional.py)
-
-🤖 ZenML Kubeflow Stack (local)
--------------
-
-Ensure you installed k3d (see infra/kubeflow). When running the registering script provided, ZenML with automatically setup the cluster and install kubeflow pipelines. Afterwards, you can simply run the according training script, ZenML will dynamically look for the Dockerfile in infra/zenml and use it as basis for the pipeline environment to be sent to Kubeflow.
+Alternatively to running an inference pipeline, you can deploy a functional API that will forward your requests directly to the deployed model. (See src/api/api_functional.py). 
 ```
-./scripts/register_kubeflow_stack.sh
-pdm export -o infra/zenml/requirements.txt --without-hashes
-./scripts/run_kubeflow_training_pipeline.sh
+docker run --add-host host.docker.internal:host-gateway -p 8081:8081 api_functional:0.1
 ```
 
-🐳 Docker API Model Deployment (local)
--------------
-
-Build and Run Docker image
+To see your pipeline runs, you can deploy the zenml server and browse to its location.
 ```
-docker build -t <IMAGE_NAME> .
-docker run -p 8000:8000 <IMAGE_NAME>
+zenml up --docker
 ```
-
-Alternatively, if you ran a CI pipeline with jenkins, such as the one provided in this project, you can simply pull the image from your repository and run it.
 
 🗃 Project Organization
 ------------
