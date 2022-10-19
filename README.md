@@ -46,6 +46,21 @@ docker run -p 8000:8000 <IMAGE_NAME>
 
 Alternatively, if you ran a CI pipeline with jenkins, such as the one provided in this project, you can simply pull the image from your repository and run it.
 
+🐳 Minikube API Model Deployment (local)
+-------------
+
+Build and push the docker image Docker image to a registry accessible to your minikube deployment.
+```
+docker build -t <IMAGE_NAME> .
+docker push <IMAGE_NAME>
+```
+Run the setup.sh script in the kubernetes infra folder, it should spin up minikube and create the necessary resources. Don't forget to change de name of the images if need be.
+```
+./setup.sh
+```
+
+Afterwards, your service should be accessible through your minikube deployment.
+
 🤖 ZenML Stack (local)
 -------------
 
