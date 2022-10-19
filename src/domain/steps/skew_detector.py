@@ -3,14 +3,13 @@ from typing import List
 import pandas as pd
 from evidently.model_profile import Profile  # type: ignore[import]
 from zenml.integrations.evidently.steps import (
-    EvidentlyProfileConfig,
-    EvidentlyProfileStep,
-    evidently_profile_step,
+    EvidentlyProfileParameters,
+    EvidentlyProfileStep
 )
-from zenml.steps import BaseStepConfig, Output, step
+from zenml.steps import BaseParameters, Output, step
 
 
-class EvidentlySkewDetectorConfig(BaseStepConfig):
+class EvidentlySkewDetectorConfig(BaseParameters):
     """Prediction Loading params"""
 
     step_name: str = "evidently_skew_detector"
@@ -25,13 +24,13 @@ def evidently_skew_detector(
     profile=Profile, dashboard=str
 ):
 
-    evidently_profile_config = EvidentlyProfileConfig(
+    evidently_profile_config = EvidentlyProfileParameters(
         ignored_cols=config.ignored_cols, profile_sections=config.profile_sections
     )
     profile, dashboard = EvidentlyProfileStep().entrypoint(
         reference_dataset=train_df,
         comparison_dataset=test_df,
-        config=evidently_profile_config,
+        params=evidently_profile_config,
     )
 
     return profile, dashboard

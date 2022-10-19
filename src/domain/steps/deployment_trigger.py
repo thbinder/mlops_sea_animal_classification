@@ -1,7 +1,7 @@
-from zenml.steps import BaseStepConfig, step
+from zenml.steps import BaseParameters, step
 
 
-class DeploymentTriggerConfig(BaseStepConfig):
+class DeploymentTriggerConfig(BaseParameters):
     """Deployment Trigger params"""
 
     seiling: float = 0.9
@@ -12,7 +12,8 @@ def deployment_trigger(config: DeploymentTriggerConfig, test_acc: float) -> bool
     """Only deploy if the global test accuracy > seiling."""
 
     if test_acc > config.seiling:
-        print("Newly trained model performances is above threshold.")
+        print("Accuracy threshold: {}".format(config.seiling))
+        print("Model Accuracy on Test: {}".format(test_acc))
         print("Deployment accepted.")
 
     return test_acc > config.seiling

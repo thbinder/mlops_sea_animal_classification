@@ -4,19 +4,17 @@ import mlflow
 import pandas as pd
 import tensorflow as tf
 from keras_preprocessing.image import ImageDataGenerator
-from zenml.integrations.mlflow.mlflow_step_decorator import enable_mlflow
-from zenml.steps import BaseStepConfig, Output, step
+from zenml.steps import BaseParameters, Output, step
 
 
-class EvaluateClassifierConfig(BaseStepConfig):
+class EvaluateClassifierConfig(BaseParameters):
     """Trainer params"""
 
     input_shape: List[int] = (224, 224, 3)
     batch_size: int = 4
 
 
-@enable_mlflow
-@step(enable_cache=False)
+@step(enable_cache=False, experiment_tracker="mlflow_experiment_tracker")
 def evaluate_classifier(
     config: EvaluateClassifierConfig, model: tf.keras.Model, test_df: pd.DataFrame
 ) -> Output(test_acc=float):
@@ -38,4 +36,4 @@ def evaluate_classifier(
     print("Model performance on Test Set:")
     print("Accuract on Test Set: {}%".format(results[1] * 100))
 
-    return results[1] * 100
+    return results[1]
