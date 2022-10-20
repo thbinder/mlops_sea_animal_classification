@@ -32,7 +32,7 @@ def train_continuous_deployment_pipeline(
     model = train_model(train_df)
     test_acc = evaluate_model(model, test_df)
     deployment_decision = deployment_trigger(test_acc)
-    model_deployer(deployment_decision, model)
+    model_deployer(deploy_decision=deployment_decision, model=model)
 
     return test_acc
 
