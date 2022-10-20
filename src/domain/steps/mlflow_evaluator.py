@@ -32,8 +32,8 @@ def evaluate_classifier(
         shuffle=False,
     )
     results = model.evaluate(test_images, verbose=1)
-    mlflow.log_metric("Test accuracy", results[1] * 100)
+    mlflow.log_metric("Test accuracy", results[1])
     print("Model performance on Test Set:")
-    print("Accuract on Test Set: {}%".format(results[1] * 100))
+    print("Accuract on Test Set: {:.2f}".format(results[1]))
 
     return results[1]

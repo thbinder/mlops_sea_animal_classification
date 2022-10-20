@@ -33,4 +33,6 @@ def evidently_skew_detector(
         params=evidently_profile_config,
     )
 
+    print("Skew detection finished. Run exploration notebook to gather results.")
+
     return profile, dashboard

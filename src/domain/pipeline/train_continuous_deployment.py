@@ -2,7 +2,7 @@ import warnings
 
 from absl import logging as absl_logging
 from dotenv import load_dotenv
-from zenml.integrations.mlflow.steps import mlflow_model_deployer_step
+from zenml.integrations.mlflow.steps import mlflow_model_deployer_step, MLFlowDeployerParameters
 from zenml.pipelines import pipeline
 
 from src.domain.steps.data_loader import train_data_loader
@@ -45,6 +45,6 @@ if __name__ == "__main__":
         train_model=train_classifier(),
         evaluate_model=evaluate_classifier(),
         deployment_trigger=deployment_trigger(),
-        model_deployer=mlflow_model_deployer_step(),
+        model_deployer=mlflow_model_deployer_step(MLFlowDeployerParameters(timeout=10)),
     )
     pipeline.run()
