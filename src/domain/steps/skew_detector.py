@@ -4,7 +4,7 @@ import pandas as pd
 from evidently.model_profile import Profile  # type: ignore[import]
 from zenml.integrations.evidently.steps import (
     EvidentlyProfileParameters,
-    EvidentlyProfileStep
+    EvidentlyProfileStep,
 )
 from zenml.steps import BaseParameters, Output, step
 

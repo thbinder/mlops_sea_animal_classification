@@ -2,7 +2,10 @@ import warnings
 
 from absl import logging as absl_logging
 from dotenv import load_dotenv
-from zenml.integrations.mlflow.steps import mlflow_model_deployer_step, MLFlowDeployerParameters
+from zenml.integrations.mlflow.steps import (
+    MLFlowDeployerParameters,
+    mlflow_model_deployer_step,
+)
 from zenml.pipelines import pipeline
 
 from src.domain.steps.data_loader import train_data_loader
