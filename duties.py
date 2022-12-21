@@ -69,9 +69,9 @@ def format(ctx):
 
 
 @duty
-def test(ctx, match=""):
+def tests(ctx, match=""):
     """
-    Run the test suite.
+    Run the various unit tests.
 
     Arguments:
         ctx: The context instance (passed automatically)

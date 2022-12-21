@@ -11,7 +11,7 @@ BASIC_DUTIES = \
 QUALITY_DUTIES = \
 	check-quality \
 	check-types \
-	test
+	tests
 
 .PHONY: help
 help:

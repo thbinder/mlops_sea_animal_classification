@@ -1,8 +1,18 @@
 # Sea Animals Classification
 
-This projects aims to provide the basic skeleton for a well-configured ML work repository. It focuses on a simple computer vision problem of classifying a few sea animals. 
+This projects aims to provide the basic skeleton for a well-configured ML work repository. It focuses on a simple computer vision problem of classifying some sea animals. 
 
-## Getting started
+🗃 Project Organization
+------------
+
+The `exploration` folder contains the different visualisation and experimentation notebooks that can be needed during the exploration process.
+
+The `src` folder should contain actual production code.
+- `data`: should contain any I/O-related script: reading from and writing to S3 buckets, file conversions, reading a `.json` file. It covers interactions with the outside world.
+- `domain`: contains all Python modules related to the internal workings of your code, like data cleaning, processing, formatting...This layer has no interaction with the outside world.
+- `api`: contains your main code functions, for example the `main.py` script if your code as a sole purpose. In the case of an ML project repository, `api` may contain several scripts like `app.py` which exposes a REST API to try out. The main function should be clear, concise and relay on methods defined on the `domain` directory.
+
+## Getting started 
 
 You can use this following lines to start a new project:
 ```
@@ -21,7 +31,7 @@ make help
 ```
 This command will give you the list of jobs you can run with the Makefile, they should be self explanatory. They include starting unit testing, checking quality, running tests, coverage and cleaning your repo from temporary files.
 
-💻 MLFlow | MinIO | Jenkins | Vault (local)
+### Setting development infrastructure 💻
 -------------
 
 Build and launch the different services locally from the infra folder. For more information on the services, refer to the related readmes.
@@ -30,55 +40,31 @@ cd infra/<SERVICE_NAME>
 docker-compose up -d --build
 ```
 
-MLFlow will be deployed on localhost:5000. (Required to run exploration notebooks)
-Minio will be deployed on localhost:9000. (Required to run exploration notebooks)
-Jenkins will be deployed on localhost:8080. If you are having a plugin issue, just navigate to localhost:8080/restart. (Required for Continuous Integration)
-Vault will be deployed on localhost:8200 and is only needed if you plan on using the ZenML local stack.
+List of available local infrastructure 
+- MLFlow will be deployed on localhost:5000. (Required to run exploration notebooks)
+- Minio will be deployed on localhost:9000. (Required to run exploration notebooks)
+- Vault will be deployed on localhost:8200. (Only needed for ZenML local stack)
+- Jenkins will be deployed on localhost:8080. (Only required for Continuous Integration from the git repo)
 
-🐳 Docker API Model Deployment (local)
+### Run your first AI pipelines 🧠
 -------------
 
-Build and Run Docker image
-```
-docker build -t <IMAGE_NAME> .
-docker run -p 8000:8000 <IMAGE_NAME>
-```
-
-Alternatively, if you ran a CI pipeline with jenkins, such as the one provided in this project, you can simply pull the image from your repository and run it.
-
-🐳 Minikube API Model Deployment (local)
--------------
-
-Build and push the docker image Docker image to a registry accessible to your minikube deployment.
-```
-docker build -t <IMAGE_NAME> .
-docker push <IMAGE_NAME>
-```
-Run the setup.sh script in the kubernetes infra folder, it should spin up minikube and create the necessary resources. Don't forget to change de name of the images if need be.
-```
-./setup.sh
-```
-
-Afterwards, your service should be accessible through your minikube deployment.
-
-🤖 ZenML Stack (local)
--------------
-
-Set Up (or reset) the default ZenML Stack, then update it to use a local mlflow server as experiment tracker and model deployer, as well as evidently as data validator. Different stacks are available from the scripts folder. However, most of them need a prior deployment of the service needed, such as MLFow, MinIO and Vault.
+You first need to deploy the necessary infrastructure services mentioned above. Then, set up (or reset) the default ZenML Stack and update it to use a the various services available.
 ```
 ./scripts/reset_zenml.sh
 ./scripts/register_local_stack.sh
 ```
-Train & deploy your first model with MLFlow
+Once the stack is registered, you can train & deploy your first model with ZenML & MLFlow !
 ```
 ./scripts/run_continuous_deployment_pipeline.sh
 ```
-Run an inference pipeline, loading every images located in `./tests_data`
+
+After the model is deployed, you can run an inference pipeline, it will load every image located in `./tests_data`, run the model on these and output the results.
 ```
 ./scripts/run_inference_pipeline.sh
 ```
 
-Alternatively to running an inference pipeline, you can deploy a functional API that will forward your requests directly to the deployed model. (See src/api/api_functional.py). 
+Alternatively, to access the model and to mimic a setup closer to production grade, you can deploy a functional API that will forward your requests directly to the MLFLow deployed model. (See src/api/api_functional.py). 
 ```
 docker run --add-host host.docker.internal:host-gateway -p 8081:8081 api_functional:0.1
 ```
@@ -88,12 +74,35 @@ To see your pipeline runs, you can deploy the zenml server and browse to its loc
 zenml up --docker
 ```
 
-🗃 Project Organization
-------------
+### Docker API 🐳 
+-------------
 
-The `exploration` folder contains the different visualisation and experimentation notebooks that can be needed during the exploration process.
+To distribute the model one convenient way is to build the associated docker image with the model wrapped around a REST API. This can be done with the following command.
+```
+docker build -t <IMAGE_NAME> .
+```
 
-The `src` folder should contain actual production code.
-- `data`: should contain any I/O-related script: reading from and writing to S3 buckets, file conversions, reading a `.json` file. It covers interactions with the outside world.
-- `domain`: contains all Python modules related to the internal workings of your code, like data cleaning, processing, formatting...This layer has no interaction with the outside world.
-- `api`: contains your main code functions, for example the `main.py` script if your code as a sole purpose. In the case of an ML project repository, `api` may contain several scripts like `app.py` which exposes a REST API to try out. The main function should be clear, concise and relay on methods defined on the `domain` directory.
+Afterwards, the docker image can be pushed to any repository, either manually or through continuous integration (cf Jenkins). The container and model can be tested locally by simply running the image and making the API calls through your browser.
+
+```
+docker run -p 8000:8000 <IMAGE_NAME>
+```
+
+Ideally, prior to pushing our image to a repository, we would like to ensure it passes integration tests. These tests and built & run by default if you use the continous integration jenkinsfile provided, but if you went the manual route, you would need to run them manually as well. To do this, you can simply run the following command and check the output.
+
+```
+cd ./tests_integration
+./start.sh
+```
+
+### Minikube API Model Deployment 🐳
+-------------
+
+A more robust way to deploy your model is through a kubernetes cluster. In this example, we'll assume you have minikube installed and setup locally as well as the previous docker image built and pushed to a repository accessible to your minikube deployment. In this example, we have used DockerHub.
+
+Simply run the setup.sh script in the kubernetes infra folder, it should spin up minikube and create the necessary resources. Don't forget to change de name of the images if need be.
+```
+./setup.sh
+```
+
+Afterwards, your service should be accessible through your minikube deployment. The console will output the address on which you can access the web UI.
