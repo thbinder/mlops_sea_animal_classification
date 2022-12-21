@@ -19,7 +19,7 @@ FROM python:3.8.10-slim-buster
 ENV PYTHONPATH=/project/pkgs
 COPY --from=builder /project/__pypackages__/3.8/lib /project/pkgs
 COPY --from=builder /project/src /project/src
-# TODO: Should be retrieved from an artifact registry
+# TODO: Ideally, should be retrieved from a model registry
 COPY ./model /project/model
 RUN pip uninstall dataclasses -y
 RUN rm -rf /project/pkgs/dataclasses*
@@ -29,5 +29,5 @@ WORKDIR /project
 # to override, run docker run -it --entrypoint=/bin/bash $image 
 CMD ["python", "-m", "uvicorn", "src.api.app:app", "--host", "0.0.0.0", "--port", "8000"]
 
-# Uncomment to showcase functional API setup
+# Uncomment to showcase functional API setup, in this case, the model previously copied would not be needed
 # CMD ["python", "-m", "uvicorn", "src.api.api_functional:app", "--host", "0.0.0.0", "--port", "8081"]

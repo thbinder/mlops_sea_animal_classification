@@ -5,7 +5,7 @@ This projects aims to provide the basic skeleton for a well-configured ML work r
 🗃 Project Organization
 ------------
 
-The `exploration` folder contains the different visualisation and experimentation notebooks that can be needed during the exploration process.
+The `exploration` folder contains the different visualisation and experimentation notebooks that can be needed during the exploration process. This step is usually undertaken in the first stages of an AI project or while other routes (models, data preparation techniques and so on...) are being investigated.
 
 The `src` folder should contain actual production code.
 - `data`: should contain any I/O-related script: reading from and writing to S3 buckets, file conversions, reading a `.json` file. It covers interactions with the outside world.
