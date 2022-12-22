@@ -15,6 +15,13 @@ COPY src/ /project/src
 # run stage, you can start from a more lightweighted base image
 FROM python:3.8.10-slim-buster
 
+# Adding necessary packages for mysql connection
+RUN apt-get -y update
+RUN apt-get -y install gcc
+RUN apt-get -y install python-mysqldb
+RUN apt-get -y install default-libmysqlclient-dev
+RUN pip install mysqlclient
+
 # retrieve packages from build stage
 ENV PYTHONPATH=/project/pkgs
 COPY --from=builder /project/__pypackages__/3.8/lib /project/pkgs
@@ -27,7 +34,7 @@ WORKDIR /project
 
 # set command/entrypoint, adapt to fit your needs
 # to override, run docker run -it --entrypoint=/bin/bash $image 
-CMD ["python", "-m", "uvicorn", "src.api.app:app", "--host", "0.0.0.0", "--port", "8000"]
+# CMD ["python", "-m", "uvicorn", "src.api.app:app", "--host", "0.0.0.0", "--port", "8000"]
 
 # Uncomment to showcase functional API setup, in this case, the model previously copied would not be needed
-# CMD ["python", "-m", "uvicorn", "src.api.api_functional:app", "--host", "0.0.0.0", "--port", "8081"]
+CMD ["python", "-m", "uvicorn", "src.api.api_functional:app", "--host", "0.0.0.0", "--port", "8081"]

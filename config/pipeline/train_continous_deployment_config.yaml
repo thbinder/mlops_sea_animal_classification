@@ -31,7 +31,7 @@ steps:
       nb_epochs: 2
       seed: 42
       allow_gpu: True
-      memory_limit: 6144
+      memory_limit: 4096
   evaluate_model:
     source:
       name: evaluate_classifier

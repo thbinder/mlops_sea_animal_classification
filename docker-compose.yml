@@ -1,0 +1,41 @@
+version: '3.9'
+
+volumes:
+    dbdata:
+
+services:
+
+    api:
+        restart: always
+        image: thomasbinder/api_functional:0.1
+        container_name: api_functional_api
+        ports:
+            - "8081:8081"
+        environment:
+            - MODEL_PREDICT_ROUTE=http://host.docker.internal:8000/invocations
+            - MYSQL_HOST=mysql_database
+            - MYSQL_USER=api
+            - MYSQL_PASSWORD=api
+            - MYSQL_DATABASE=USERS
+            - API_KEY=secureAPIKEY
+            - API_KEY_NAME=access_token
+        depends_on:
+            - db
+        links:
+            - "db:mysql_database"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+
+    db:
+        restart: always
+        image: mysql:5.7
+        container_name: api_functional_db
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_DATABASE=USERS
+            - MYSQL_USER=api
+            - MYSQL_PASSWORD=api
+            - MYSQL_ROOT_PASSWORD=my-secret-password
+        volumes:
+            - dbdata:/var/lib/mysql
