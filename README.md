@@ -8,9 +8,9 @@ This projects aims to provide the basic skeleton for a well-configured ML work r
 The `exploration` folder contains the different visualisation and experimentation notebooks that can be needed during the exploration process. This step is usually undertaken in the first stages of an AI project or while other routes (models, data preparation techniques and so on...) are being investigated.
 
 The `src` folder should contain actual production code.
-- `data`: should contain any I/O-related script: reading from and writing to S3 buckets, file conversions, reading a `.json` file. It covers interactions with the outside world.
+- `io`: should contain any I/O-related script: reading from and writing to S3 buckets, file conversions, reading a `.json` file. It covers interactions with the outside world.
 - `domain`: contains all Python modules related to the internal workings of your code, like data cleaning, processing, formatting...This layer has no interaction with the outside world.
-- `api`: contains your main code functions, for example the `main.py` script if your code as a sole purpose. In the case of an ML project repository, `api` may contain several scripts like `app.py` which exposes a REST API to try out. The main function should be clear, concise and relay on methods defined on the `domain` directory.
+- `app`: contains your main code functions, for example the `main.py` script if your code as a sole purpose. In the case of an ML project repository, `app` may contain several scripts like `app.py` which exposes a REST API to try out. The main function should be clear, concise and relay on methods defined on the `domain` directory.
 
 ## Getting started 
 
@@ -74,7 +74,7 @@ To see your pipeline runs, you can deploy the zenml server and browse to its loc
 zenml up --docker
 ```
 
-### Docker API 🐳 
+### Simple Docker API 🐳 
 -------------
 
 To distribute the model one convenient way is to build the associated docker image with the model wrapped around a REST API. This can be done with the following command.
@@ -94,6 +94,17 @@ Ideally, prior to pushing our image to a repository, we would like to ensure it 
 cd ./tests_integration
 ./start.sh
 ```
+
+### Docker Compose API Model Deployment 🐳
+-------------
+
+A more robust API can be deployed along with a MYSQL database holding information about authorized users.
+
+```
+docker-compose up
+```
+
+Afterwards, the API should be accessible on port 8000.
 
 ### Minikube API Model Deployment 🐳
 -------------

@@ -7,18 +7,19 @@ services:
 
     api:
         restart: always
-        image: thomasbinder/api_functional:0.1
+        image: thomasbinder/sea_animals_api:0.1
         container_name: api_functional_api
         ports:
-            - "8081:8081"
+            - "8000:8000"
         environment:
-            - MODEL_PREDICT_ROUTE=http://host.docker.internal:8000/invocations
-            - MYSQL_HOST=mysql_database
-            - MYSQL_USER=api
-            - MYSQL_PASSWORD=api
-            - MYSQL_DATABASE=USERS
-            - API_KEY=secureAPIKEY
-            - API_KEY_NAME=access_token
+            - MODEL_PREDICT_ROUTE=${MODEL_PREDICT_ROUTE}
+            - MYSQL_HOST=${MYSQL_HOST}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_CONNECTION=${MYSQL_CONNECTION}
+            - API_KEY=${API_KEY}
+            - API_KEY_NAME=${API_KEY_NAME}
         depends_on:
             - db
         links:
@@ -33,9 +34,9 @@ services:
         ports:
             - "3306:3306"
         environment:
-            - MYSQL_DATABASE=USERS
-            - MYSQL_USER=api
-            - MYSQL_PASSWORD=api
-            - MYSQL_ROOT_PASSWORD=my-secret-password
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
         volumes:
             - dbdata:/var/lib/mysql

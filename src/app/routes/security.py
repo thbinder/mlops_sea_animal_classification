@@ -1,18 +1,29 @@
-import logging
 import os
 from typing import List
 
 import numpy as np
 import requests
-import tensorflow as tf
-from fastapi import Depends, FastAPI, File, HTTPException, Security, UploadFile, status
+from fastapi import (
+    APIRouter,
+    Depends,
+    File,
+    HTTPException,
+    Security,
+    UploadFile,
+    status,
+)
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi.security.api_key import APIKey, APIKeyHeader
 from sqlalchemy.orm import Session
 
-from src.data import crud, models, schemas
-from src.data.mysql_database import SessionLocal, engine
+from src.app.main import logger
 from src.domain.class_mapping import class_mapping
+from src.domain.data_preprocessing import preprocess_image_to_tensor
+from src.io import crud, models, schemas
+from src.io.mysql_database import SessionLocal, engine
+
+router = APIRouter(prefix="/secured")
+http_security = HTTPBasic()
 
 API_KEY = os.environ.get("API_KEY")
 API_KEY_NAME = os.environ.get("API_KEY_NAME")
@@ -21,23 +32,6 @@ api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
 # data structure creation in mysql
 models.Base.metadata.create_all(bind=engine)
 
-# Configuration
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-logging.basicConfig(
-    level=logging.INFO,
-    format="[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s",
-    datefmt="%H:%M:%S",
-)
-logger = logging.getLogger(__name__)
-
-# App definition
-app = FastAPI(
-    title="Sea Animal Classification API",
-    description="API for classifying sea animals.",
-    version="0.1.0",
-)
-security = HTTPBasic()
-
 # Dependency
 def get_db():
     db = SessionLocal()
@@ -45,6 +39,15 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+# Admin API security
+async def get_api_key(api_key_header: str = Security(api_key_header)):
+    if api_key_header == API_KEY:
+        return api_key_header
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN, detail="Could not validate credentials"
+    )
 
 
 # User API security
@@ -69,16 +72,7 @@ def verify_user(credentials: HTTPBasicCredentials, db: Session = Depends(get_db)
     return
 
 
-# Admin API security
-async def get_api_key(api_key_header: str = Security(api_key_header)):
-    if api_key_header == API_KEY:
-        return api_key_header
-    raise HTTPException(
-        status_code=status.HTTP_403_FORBIDDEN, detail="Could not validate credentials"
-    )
-
-
-@app.post("/users/", response_model=schemas.User, tags=["admin use"])
+@router.post("/users/", response_model=schemas.User, tags=["admin use"])
 def create_user(
     user: schemas.UserCreate,
     db: Session = Depends(get_db),
@@ -90,7 +84,7 @@ def create_user(
     return crud.create_user(db=db, user=user)
 
 
-@app.get("/users/", response_model=List[schemas.User], tags=["admin use"])
+@router.get("/users/", response_model=List[schemas.User], tags=["admin use"])
 def read_users(
     skip: int = 0,
     limit: int = 100,
@@ -101,7 +95,7 @@ def read_users(
     return users
 
 
-@app.get("/users/{user_id}", response_model=schemas.User, tags=["admin use"])
+@router.get("/users/{user_id}", response_model=schemas.User, tags=["admin use"])
 def read_user(
     user_id: int,
     db: Session = Depends(get_db),
@@ -113,16 +107,10 @@ def read_user(
     return db_user
 
 
-@app.get("/ping", status_code=200, tags=["basic use"])
-async def ping():
-    """Returns message if API is alive and healthy"""
-    return {"message": "pong!"}
-
-
-@app.post("/v1/predict", status_code=200, tags=["basic use"])
+@router.post("/predict", status_code=200, tags=["basic use"])
 async def predict(
     file: UploadFile = File(...),
-    credentials: HTTPBasicCredentials = Depends(security),
+    credentials: HTTPBasicCredentials = Depends(http_security),
     db: Session = Depends(get_db),
 ):
     """Returns the predicted class of an image"""
@@ -136,14 +124,13 @@ async def predict(
 
     # Prepare Data for prediction
     try:
-        buff = tf.io.decode_image(
-            img, channels=3, dtype=tf.dtypes.uint8, expand_animations=True
-        )
-        tensor = tf.image.resize(buff, [224, 224])
-        tensor = tf.reshape(tensor, [1, 224, 224, 3])
+        tensor = preprocess_image_to_tensor(img)
     except Exception as e:
         logger.error("Impossible to prepare input: {}".format(e))
-        return {"status_code": 400, "error": "Unable to parse request body"}
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Unable to parse request body",
+        )
 
     try:
         r = requests.post(
@@ -153,7 +140,10 @@ async def predict(
         )
     except Exception as e:
         logger.error("Impossible to make request to service: {}".format(e))
-        return {"status_code": 400, "error": "Unable to make request to service"}
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Unable to make predictions",
+        )
 
     label = np.argmax(r.json())
     logger.info("Predictions Ready.")

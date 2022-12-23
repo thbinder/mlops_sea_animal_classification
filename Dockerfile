@@ -34,7 +34,4 @@ WORKDIR /project
 
 # set command/entrypoint, adapt to fit your needs
 # to override, run docker run -it --entrypoint=/bin/bash $image 
-# CMD ["python", "-m", "uvicorn", "src.api.app:app", "--host", "0.0.0.0", "--port", "8000"]
-
-# Uncomment to showcase functional API setup, in this case, the model previously copied would not be needed
-CMD ["python", "-m", "uvicorn", "src.api.api_functional:app", "--host", "0.0.0.0", "--port", "8081"]
+CMD ["python", "-m", "uvicorn", "src.app.main:app", "--host", "0.0.0.0", "--port", "8000"]

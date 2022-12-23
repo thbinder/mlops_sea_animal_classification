@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from requests.auth import HTTPBasicAuth
 
-from src.api.app import app
+from src.app.main import app
 
 client = TestClient(app)
 

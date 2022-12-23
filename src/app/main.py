@@ -7,8 +7,12 @@ from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 from src.domain.class_mapping import class_mapping
+from src.domain.data_preprocessing import preprocess_image_to_tensor
 
-# Configuration
+# Loading ML model
+MODEL = tf.keras.models.load_model("./model")
+
+# Logging Configuration
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 logging.basicConfig(
     level=logging.INFO,
@@ -17,45 +21,41 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Loading model
-MODEL = tf.keras.models.load_model("./model")
-
 # App definition
 app = FastAPI(
     title="Sea Animal Classification API",
     description="API for classifying sea animals.",
     version="0.1.0",
 )
-security = HTTPBasic()
-user_db = {"thomas": "thomas"}
+http_security = HTTPBasic()
+
+# If deployment with mysql database
+if os.environ.get("MYSQL_CONNECTION") == "YES":
+    from .routes import security
+
+    app.include_router(security.router)
 
 
-def verify_user(credentials: HTTPBasicCredentials):
-    username = credentials.username
-    password = credentials.password
-
-    if not (user_db.get(username)) or not (user_db.get(username) == password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect email or password",
-            headers={"WWW-Authenticate": "Basic"},
-        )
-    return
-
-
-@app.get("/ping", status_code=200)
+@app.get("/ping", status_code=200, tags=["basic use"])
 async def ping():
+    """Returns message if API is alive and healthy"""
     return {"message": "pong!"}
 
 
-@app.post("/predict", status_code=200)
+@app.post("/predict", status_code=200, tags=["test use"])
 async def predict(
-    file: UploadFile = File(...), credentials: HTTPBasicCredentials = Depends(security)
+    file: UploadFile = File(...),
+    credentials: HTTPBasicCredentials = Depends(http_security),
 ):
     """Returns the predicted class of an image"""
 
-    # Verify credentials
-    verify_user(credentials)
+    ### Check dummy credentials
+    if credentials.username != "thomas" or credentials.password != "thomas":
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Basic"},
+        )
 
     # Retrieve input file
     img = await file.read()
@@ -63,14 +63,13 @@ async def predict(
 
     # Prepare Data for prediction
     try:
-        buff = tf.io.decode_image(
-            img, channels=3, dtype=tf.dtypes.uint8, expand_animations=True
-        )
-        tensor = tf.image.resize(buff, [224, 224])
-        tensor = tf.reshape(tensor, [1, 224, 224, 3])
+        tensor = preprocess_image_to_tensor(img)
     except Exception as e:
         logger.error("Impossible to prepare input: {}".format(e))
-        return {"status_code": 400, "error": "Unable to parse request body"}
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Unable to parse request body",
+        )
 
     # Predict class of image
     try:
@@ -79,6 +78,9 @@ async def predict(
         logger.info("Predictions Ready.")
     except Exception as e:
         logger.error("Impossible to make predictions: {}".format(e))
-        return {"status_code": 400, "error": "Unable to make predictions"}
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Unable to make predictions",
+        )
 
     return {"class label": str(class_mapping[label])}
