@@ -50,20 +50,18 @@ exploration = [
     "matplotlib>=3.5.3",
     "kaggle>=1.5.12",
     "scikit-learn>=1.1.2",
-    "minio>=7.1.11",
-    "mlflow-skinny==1.24.0",
-    "boto3==1.21.21",
+    "minio>=7.1.13",
 ]
 industrialisation = [
-    "zenml[server]>=0.20.4",
     "hvac>=1.0.2",
-    "s3fs==2022.3.0",
-    "itsdangerous==2.0.1",
-    "werkzeug==2.0.3",
-    "evidently==0.1.52dev0",
-    "mlserver>=1.1.0",
-    "mlserver-mlflow>=1.1.0",
-    "mlflow==1.25.1",
+    "evidently==0.1.54dev0",
+    "zenml[server]>=0.32.0",
+    "mlflow<1.26.0",
+    "mlserver>=0.5.3",
+    "mlserver-mlflow>=0.5.3",
+    "s3fs<2022.11.0",
+    "boto3>=1.24.59",
+    "aiohttp>=3.8.3",
 ]
 
 [tool.black]

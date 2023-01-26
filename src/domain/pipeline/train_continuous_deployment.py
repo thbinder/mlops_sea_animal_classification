@@ -48,6 +48,6 @@ if __name__ == "__main__":
         train_model=train_classifier(),
         evaluate_model=evaluate_classifier(),
         deployment_trigger=deployment_trigger(),
-        model_deployer=mlflow_model_deployer_step(MLFlowDeployerParameters(timeout=10)),
+        model_deployer=mlflow_model_deployer_step(MLFlowDeployerParameters(timeout=20)),
     )
     pipeline.run()

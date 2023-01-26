@@ -26,7 +26,7 @@ class TrainClassifierConfig(BaseParameters):
     memory_limit: int = 0
 
 
-@step(enable_cache=False, experiment_tracker="mlflow_experiment_tracker")
+@step(enable_cache=False, experiment_tracker="local_mlflow_tracker")
 def train_classifier(
     config: TrainClassifierConfig,
     train_df: pd.DataFrame,

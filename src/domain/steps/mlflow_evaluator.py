@@ -14,7 +14,7 @@ class EvaluateClassifierConfig(BaseParameters):
     batch_size: int = 4
 
 
-@step(enable_cache=False, experiment_tracker="mlflow_experiment_tracker")
+@step(enable_cache=False, experiment_tracker="local_mlflow_tracker")
 def evaluate_classifier(
     config: EvaluateClassifierConfig, model: tf.keras.Model, test_df: pd.DataFrame
 ) -> Output(test_acc=float):
