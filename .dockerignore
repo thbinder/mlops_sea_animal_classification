@@ -3,6 +3,7 @@ tests/
 test_data/
 tests_integration/
 scripts/
+stacks/
 exploration/
 config/
 infra/

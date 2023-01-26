@@ -1,5 +1,5 @@
 # build stage
-FROM python:3.10.6 AS builder
+FROM python:3.8.10 AS builder
 
 # install PDM
 RUN pip install -U pip setuptools wheel
@@ -13,7 +13,7 @@ RUN mkdir __pypackages__ && pdm install --prod --no-lock --no-editable
 COPY src/ /project/src
 
 # run stage, you can start from a more lightweighted base image
-FROM python:3.10.6-slim-buster
+FROM python:3.8.10-slim-buster
 
 # Adding necessary packages for mysql connection
 RUN apt-get -y update
