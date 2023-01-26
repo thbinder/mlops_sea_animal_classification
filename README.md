@@ -31,28 +31,13 @@ make help
 ```
 This command will give you the list of jobs you can run with the Makefile, they should be self explanatory. They include starting unit testing, checking quality, running tests, coverage and cleaning your repo from temporary files.
 
-### Setting development infrastructure 💻
--------------
-
-Build and launch the different services locally from the infra folder. For more information on the services, refer to the related readmes.
-```
-cd infra/<SERVICE_NAME>
-docker-compose up -d --build
-```
-
-List of available local infrastructure 
-- MLFlow will be deployed on localhost:5000. (Required to run exploration notebooks)
-- Minio will be deployed on localhost:9000. (Required to run exploration notebooks)
-- Vault will be deployed on localhost:8200. (Only needed for ZenML local stack)
-- Jenkins will be deployed on localhost:8080. (Only required for Continuous Integration from the git repo)
-
 ### Run your first AI pipelines 🧠
 -------------
 
 You first need to deploy the necessary infrastructure services mentioned above. Then, set up (or reset) the default ZenML Stack and update it to use a the various services available.
 ```
 ./scripts/reset_zenml.sh
-./scripts/register_local_stack.sh
+./stacks/setup_local_stack.sh
 ```
 Once the stack is registered, you can train & deploy your first model with ZenML & MLFlow !
 ```
@@ -104,16 +89,4 @@ A more robust API can be deployed along with a MYSQL database holding informatio
 docker-compose up
 ```
 
-Afterwards, the API should be accessible on port 8000.
-
-### Minikube API Model Deployment 🐳
--------------
-
-A more robust way to deploy your model is through a kubernetes cluster. In this example, we'll assume you have minikube installed and setup locally as well as the previous docker image built and pushed to a repository accessible to your minikube deployment. In this example, we have used DockerHub.
-
-Simply run the setup.sh script in the kubernetes infra folder, it should spin up minikube and create the necessary resources. Don't forget to change de name of the images if need be.
-```
-./setup.sh
-```
-
-Afterwards, your service should be accessible through your minikube deployment. The console will output the address on which you can access the web UI.
+Afterwards, the API should be accessible on port 8081.

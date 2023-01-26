@@ -10,7 +10,7 @@ services:
         image: thomasbinder/sea_animals_api:0.1
         container_name: api_functional_api
         ports:
-            - "8000:8000"
+            - "8081:8081"
         environment:
             - MODEL_PREDICT_ROUTE=${MODEL_PREDICT_ROUTE}
             - MYSQL_HOST=${MYSQL_HOST}
