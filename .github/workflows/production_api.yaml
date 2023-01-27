@@ -28,10 +28,10 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sea_animals_api:1.0
+          tags: thomasbinder/sea_animals_api:1.0
       -
         name: Test
         run: cd ./tests_integration/ && ./start.sh
       -
         name: Push
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/sea_animals_api:1.0
+        run: docker push thomasbinder/sea_animals_api:1.0
