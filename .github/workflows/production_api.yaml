@@ -6,7 +6,7 @@ on:
       - "master"
 
 jobs:
-  build:
+  build_push_api:
     runs-on: ubuntu-latest
     steps:
       -
@@ -27,11 +27,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          push: false
-          tags: thomasbinder/sea_animals_api:1.0
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sea_animals_api:1.0
       -
         name: Test
         run: cd ./tests_integration/ && ./start.sh
-      -
-        name: Push
-        run: docker push thomasbinder/sea_animals_api:1.0
