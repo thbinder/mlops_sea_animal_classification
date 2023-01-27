@@ -75,7 +75,7 @@ cd ./tests_integration
 ### Docker Compose API Model Deployment 🐳
 -------------
 
-A more robust API can be deployed along with a MYSQL database holding information about authorized users.
+A more robust API can be deployed along with a MYSQL database holding information about authorized users. Prior to running the compose stack, you will need to fill the .env file with adapted parameters.
 
 ```
 docker-compose up
