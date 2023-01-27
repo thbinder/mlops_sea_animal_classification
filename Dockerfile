@@ -24,7 +24,7 @@ RUN pip install mysqlclient
 
 # retrieve packages from build stage
 ENV PYTHONPATH=/project/pkgs
-COPY --from=builder /project/__pypackages__/3.10/lib /project/pkgs
+COPY --from=builder /project/__pypackages__/3.8/lib /project/pkgs
 COPY --from=builder /project/src /project/src
 # TODO: Ideally, should be retrieved from a model registry
 COPY ./model /project/model
