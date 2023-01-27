@@ -8,7 +8,7 @@ time.sleep(15)
 # API address definition
 api_address = "api"
 # API port
-api_port = 8000
+api_port = 8081
 
 # Request
 file = {"file": open("nudibranch.jpg", "rb")}

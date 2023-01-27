@@ -7,7 +7,7 @@ services:
 
     api:
         restart: always
-        image: thomasbinder/sea_animals_api:0.1
+        image: thomasbinder/sea_animals_api:1.0
         container_name: api_functional_api
         ports:
             - "8081:8081"

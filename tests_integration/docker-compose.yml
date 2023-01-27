@@ -9,12 +9,12 @@ volumes:
 services:
 
   api:
-    image: thomasbinder/sea_animals_api:0.1
+    image: thomasbinder/sea_animals_api:1.0
     container_name: api
     networks:
       - docker
     ports:
-      - 8000:8000
+      - 8081:8081
 
   health:
     build: ./health/
