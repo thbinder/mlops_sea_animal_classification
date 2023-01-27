@@ -5,6 +5,7 @@ import pandas as pd
 import tensorflow as tf
 from keras_preprocessing.image import ImageDataGenerator
 from zenml.steps import BaseParameters, Output, step
+from zenml.integrations.mlflow.mlflow_utils import get_tracking_uri
 
 from src.domain.model import build_model
 
@@ -112,6 +113,9 @@ def train_classifier(
 
     # Automatically log features
     mlflow.tensorflow.autolog()
+    print("To observe run details in mlflow:")
+    print("mlflow ui --backend-store-uri={} --port=4997".format(get_tracking_uri()))
+    
     # Train Model
     model.fit(
         train_images,
@@ -120,5 +124,7 @@ def train_classifier(
         validation_steps=len(val_images),
         epochs=config.nb_epochs,
     )
+
+    print("Model trained.")
 
     return model
