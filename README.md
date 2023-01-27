@@ -14,18 +14,12 @@ The `src` folder should contain actual production code.
 
 ## Getting started 
 
-You can use this following lines to start a new project:
+You shoud start by installing [PDM](https://github.com/pdm-project/pdm) the way you prefer. Afterwards, you can simply run the following command at the root of the project to setup your environment. It should spinup a project specific virtual environment with all the necessary packages.
 ```
-./scripts/setup.sh
-```
-The setup script will ensure pipx and pdm are installed with your current python version. Then, it will run the command pdm install which basically sets you up for working with the repo. Alternatively, you can install [PDM](https://github.com/pdm-project/pdm) the way you prefer. 
-
-Namely, if you have installed pdm with pipx, you can simply run the following command at the root of the project to setup your environment:
-```
-python3.8 -m pipx run pdm install
+pdm install
 ```
 
-To run basic duties locally you can simply try out the following commands:
+To try and run basic duties you can simply try out the following commands:
 ```
 make help
 ```
@@ -34,12 +28,15 @@ This command will give you the list of jobs you can run with the Makefile, they 
 ### Run your first AI pipelines 🧠
 -------------
 
-You first need to deploy the necessary infrastructure services mentioned above. Then, set up (or reset) the default ZenML Stack and update it to use a the various services available.
+Before running any pipeline you will need to do several things. First, set up (or reset) the default ZenML Stack and update it to use a the various components installed in the virtual environment.
 ```
 ./scripts/reset_zenml.sh
-./stacks/setup_local_stack.sh
+./infra/stacks/setup_local_stack.sh
 ```
-Once the stack is registered, you can train & deploy your first model with ZenML & MLFlow !
+
+Then you will need to retrieve the data, for this purpose you can use the ingestion notebook in the exploration folder. To make it work you'll need to have your kaggle credentials. Alternatively, you can just go to the website and download the data manually.
+
+Once the stack is registered and the data ready, you can train & deploy your first model with ZenML & MLFlow !
 ```
 ./scripts/run_continuous_deployment_pipeline.sh
 ```
@@ -49,20 +46,15 @@ After the model is deployed, you can run an inference pipeline, it will load eve
 ./scripts/run_inference_pipeline.sh
 ```
 
-Alternatively, to access the model and to mimic a setup closer to production grade, you can deploy a functional API that will forward your requests directly to the MLFLow deployed model. (See src/api/api_functional.py). 
-```
-docker run --add-host host.docker.internal:host-gateway -p 8081:8081 api_functional:0.1
-```
-
 To see your pipeline runs, you can deploy the zenml server and browse to its location.
 ```
-zenml up --docker
+zenml up
 ```
 
 ### Simple Docker API 🐳 
 -------------
 
-To distribute the model one convenient way is to build the associated docker image with the model wrapped around a REST API. This can be done with the following command.
+To distribute the model, one convenient way is to build the associated docker image with the model wrapped around a REST API. This can be done with the following command.
 ```
 docker build -t <IMAGE_NAME> .
 ```
@@ -70,7 +62,7 @@ docker build -t <IMAGE_NAME> .
 Afterwards, the docker image can be pushed to any repository, either manually or through continuous integration (cf Jenkins). The container and model can be tested locally by simply running the image and making the API calls through your browser.
 
 ```
-docker run -p 8000:8000 <IMAGE_NAME>
+docker run -p 8081:8081 <IMAGE_NAME>
 ```
 
 Ideally, prior to pushing our image to a repository, we would like to ensure it passes integration tests. These tests and built & run by default if you use the continous integration jenkinsfile provided, but if you went the manual route, you would need to run them manually as well. To do this, you can simply run the following command and check the output.
