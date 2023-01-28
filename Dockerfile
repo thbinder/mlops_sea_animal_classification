@@ -26,8 +26,7 @@ RUN pip install mysqlclient
 ENV PYTHONPATH=/project/pkgs
 COPY --from=builder /project/__pypackages__/3.8/lib /project/pkgs
 COPY --from=builder /project/src /project/src
-# TODO: Ideally, should be retrieved from a model registry
-COPY ./model /project/model
+# Remove some unnecessary packages
 RUN pip uninstall dataclasses -y
 RUN rm -rf /project/pkgs/dataclasses*
 WORKDIR /project
