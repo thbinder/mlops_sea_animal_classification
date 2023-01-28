@@ -18,7 +18,7 @@ from sqlalchemy.orm import Session
 
 from src.app.main import logger
 from src.domain.class_mapping import class_mapping
-from src.domain.data_preprocessing import preprocess_image_to_tensor
+from src.domain.data_preprocessing import preprocess_image_to_array
 from src.io import crud, models, schemas
 from src.io.mysql_database import SessionLocal, engine
 
@@ -124,7 +124,8 @@ async def predict(
 
     # Prepare Data for prediction
     try:
-        tensor = preprocess_image_to_tensor(img)
+        tensor = preprocess_image_to_array(img)
+        logger.info("File preprocessed.")
     except Exception as e:
         logger.error("Impossible to prepare input: {}".format(e))
         raise HTTPException(
@@ -136,7 +137,8 @@ async def predict(
         # Make the post request to model endpoint
         r = requests.post(
             url=os.environ.get("MODEL_PREDICT_ROUTE"),
-            json={"instances": tensor.numpy().tolist()},
+            json={"instances": tensor.tolist()},
+            # json={"instances": tensor.numpy().tolist()},
         )
     except Exception as e:
         logger.error("Impossible to make request to service: {}".format(e))

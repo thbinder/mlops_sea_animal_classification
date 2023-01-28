@@ -2,12 +2,11 @@ import logging
 import os
 
 import numpy as np
-import tensorflow as tf
 from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 from src.domain.class_mapping import class_mapping
-from src.domain.data_preprocessing import preprocess_image_to_tensor
+from src.domain.data_preprocessing import preprocess_image_to_array
 
 # Logging Configuration
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
@@ -60,7 +59,8 @@ async def predict(
 
     # Prepare Data for prediction
     try:
-        tensor = preprocess_image_to_tensor(img)
+        tensor = preprocess_image_to_array(img)
+        logger.info("File preprocessed.")
     except Exception as e:
         logger.error("Impossible to prepare input: {}".format(e))
         raise HTTPException(

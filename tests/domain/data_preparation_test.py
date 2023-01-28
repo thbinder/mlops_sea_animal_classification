@@ -14,4 +14,3 @@ def test_generate_data_for_training():
         assert True
     except Exception as e:
         assert False
-

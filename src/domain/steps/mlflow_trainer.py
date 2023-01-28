@@ -4,8 +4,8 @@ import mlflow
 import pandas as pd
 import tensorflow as tf
 from keras_preprocessing.image import ImageDataGenerator
-from zenml.steps import BaseParameters, Output, step
 from zenml.integrations.mlflow.mlflow_utils import get_tracking_uri
+from zenml.steps import BaseParameters, Output, step
 
 from src.domain.model import build_model
 
@@ -115,7 +115,7 @@ def train_classifier(
     mlflow.tensorflow.autolog()
     print("To observe run details in mlflow:")
     print("mlflow ui --backend-store-uri={} --port=4997".format(get_tracking_uri()))
-    
+
     # Train Model
     model.fit(
         train_images,
