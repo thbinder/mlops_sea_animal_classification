@@ -1,6 +1,6 @@
 [project]
 name = "sea_animal_classification"
-version = "0.1"
+version = "1.0"
 description = "An MLOps example of a Sea Animal classification computer vision problem."
 authors = [
     {name = "Thomas Binder", email = ""},

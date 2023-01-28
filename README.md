@@ -12,7 +12,7 @@ The `src` folder should contain actual production code.
 - `domain`: contains all Python modules related to the internal workings of your code, like data cleaning, processing, formatting...This layer has no interaction with the outside world.
 - `app`: contains your main code functions, for example the `main.py` script if your code as a sole purpose. In the case of an ML project repository, `app` may contain several scripts like `app.py` which exposes a REST API to try out. The main function should be clear, concise and relay on methods defined on the `domain` directory.
 
-## Getting started 
+## 🌀 Getting started 🌀
 
 You shoud start by installing [PDM](https://github.com/pdm-project/pdm) the way you prefer. Afterwards, you can simply run the following command at the root of the project to setup your environment. It should spinup a project specific virtual environment with all the necessary packages.
 ```
@@ -25,7 +25,7 @@ make help
 ```
 This command will give you the list of jobs you can run with the Makefile, they should be self explanatory. They include starting unit testing, checking quality, running tests, coverage and cleaning your repo from temporary files.
 
-### Run your first AI pipelines 🧠
+### 🧠 AI Pipelines
 -------------
 
 Before running any pipeline you will need to do several things. First, set up (or reset) the default ZenML Stack and update it to use a the various components installed in the virtual environment.
@@ -51,7 +51,7 @@ To see your pipeline runs, you can deploy the zenml server and browse to its loc
 zenml up
 ```
 
-### Simple Docker API 🐳 
+### 🐳 Simple Docker API
 -------------
 
 To distribute the model, one convenient way is to build the associated docker image with the model wrapped around a REST API. This can be done with the following command.
@@ -72,7 +72,7 @@ cd ./tests_integration
 ./start.sh
 ```
 
-### Docker Compose API Model Deployment 🐳
+### 🐳 Docker Compose API Deployment
 -------------
 
 A more robust API can be deployed along with a MYSQL database holding information about authorized users. Prior to running the compose stack, you will need to fill the .env file with adapted parameters.

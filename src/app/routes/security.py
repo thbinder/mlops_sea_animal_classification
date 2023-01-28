@@ -133,8 +133,8 @@ async def predict(
         )
 
     try:
+        # Make the post request to model endpoint
         r = requests.post(
-            # TODO: make an argument of url
             url=os.environ.get("MODEL_PREDICT_ROUTE"),
             json={"instances": tensor.numpy().tolist()},
         )

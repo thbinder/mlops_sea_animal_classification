@@ -1,7 +1,11 @@
+# infra
+zenml_stack_recipes
+
 # ml
 .zen
 .zenconfig
 mlruns
+model
 
 # data
 data/

@@ -9,9 +9,6 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from src.domain.class_mapping import class_mapping
 from src.domain.data_preprocessing import preprocess_image_to_tensor
 
-# Loading ML model
-MODEL = tf.keras.models.load_model("./model")
-
 # Logging Configuration
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 logging.basicConfig(
@@ -71,11 +68,11 @@ async def predict(
             detail="Unable to parse request body",
         )
 
-    # Predict class of image
+    # Send Random Label
     try:
-        preds = MODEL.predict(tensor)
+        preds = np.random.rand(19)
         label = np.argmax(preds)
-        logger.info("Predictions Ready.")
+        logger.info("Prediction Ready.")
     except Exception as e:
         logger.error("Impossible to make predictions: {}".format(e))
         raise HTTPException(
