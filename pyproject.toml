@@ -6,8 +6,6 @@ authors = [
     {name = "Thomas Binder", email = ""},
 ]
 dependencies = [
-    "tensorflow==2.8.0",
-    "tensorflow-io==0.24.0",
     "python-dotenv>=0.21.0",
     "requests>=2.28.1",
     "uvicorn>=0.17.6",
@@ -15,6 +13,8 @@ dependencies = [
     "fastapi>=0.75.2",
     "sqlalchemy>=1.4.41",
     "mysql-connector-python>=8.0.31",
+    "pillow>=9.4.0",
+    "numpy>=1.24.1",
 ]
 requires-python = "==3.8.10"
 license = {text = "MIT"}
@@ -53,6 +53,8 @@ exploration = [
     "minio>=7.1.13",
 ]
 industrialisation = [
+    "tensorflow==2.8.0",
+    "tensorflow-io==0.24.0",
     "hvac>=1.0.2",
     "evidently==0.1.54dev0",
     "zenml[server]>=0.32.0",
