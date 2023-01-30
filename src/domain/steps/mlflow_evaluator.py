@@ -5,6 +5,7 @@ import pandas as pd
 import tensorflow as tf
 from keras_preprocessing.image import ImageDataGenerator
 from zenml.steps import BaseParameters, Output, step
+from zenml.client import Client
 
 
 class EvaluateClassifierConfig(BaseParameters):
@@ -14,7 +15,7 @@ class EvaluateClassifierConfig(BaseParameters):
     batch_size: int = 4
 
 
-@step(enable_cache=False, experiment_tracker="local_mlflow_tracker")
+@step(enable_cache=False, experiment_tracker=Client().active_stack.experiment_tracker.name)
 def evaluate_classifier(
     config: EvaluateClassifierConfig, model: tf.keras.Model, test_df: pd.DataFrame
 ) -> Output(test_acc=float):

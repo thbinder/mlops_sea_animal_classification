@@ -6,6 +6,7 @@ import tensorflow as tf
 from keras_preprocessing.image import ImageDataGenerator
 from zenml.integrations.mlflow.mlflow_utils import get_tracking_uri
 from zenml.steps import BaseParameters, Output, step
+from zenml.client import Client
 
 from src.domain.model import build_model
 
@@ -27,7 +28,7 @@ class TrainClassifierConfig(BaseParameters):
     memory_limit: int = 0
 
 
-@step(enable_cache=False, experiment_tracker="local_mlflow_tracker")
+@step(enable_cache=False, experiment_tracker=Client().active_stack.experiment_tracker.name)
 def train_classifier(
     config: TrainClassifierConfig,
     train_df: pd.DataFrame,

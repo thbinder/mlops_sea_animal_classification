@@ -8,8 +8,6 @@ jobs:
   run-staging-workflow:
     runs-on: ubuntu-latest
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
       ZENML_USERNAME: ${{ secrets.ZENML_USERNAME }}
       ZENML_PASSWORD: ${{ secrets.ZENML_PASSWORD }}
