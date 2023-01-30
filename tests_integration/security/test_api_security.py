@@ -14,7 +14,7 @@ api_port = 8081
 file = {"file": open("nudibranch.jpg", "rb")}
 r1 = requests.post(
     url="http://{address}:{port}/predict".format(address=api_address, port=api_port),
-    auth=("thomas", "thomas"),
+    auth=("test_user", "test_password"),
     files=file,
 )
 

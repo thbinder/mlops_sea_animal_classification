@@ -46,7 +46,7 @@ async def predict(
     """Returns the predicted class of an image"""
 
     ### Check dummy credentials
-    if credentials.username != "thomas" or credentials.password != "thomas":
+    if credentials.username != "test_user" or credentials.password != "test_password":
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
