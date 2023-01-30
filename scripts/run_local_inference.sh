@@ -1,0 +1,1 @@
+pdm run zenml pipeline run src/domain/pipeline/local_inference.py -c config/pipeline/local_inference_config.yaml
