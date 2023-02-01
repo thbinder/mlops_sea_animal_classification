@@ -14,9 +14,9 @@ class GoogleTrainDataLoderConfig(BaseParameters):
     """Google Data Loading params"""
 
     test_size: float = 0.2
-    bucket_name: str = "mlops-sea-animal"
-    project_id: str = "mlops-sea-animal"
-    dl_dir: str = "/raw_data"
+    bucket_name: str = "sea-animals-data"
+    project_id: str = "mlops-demos-376509"
+    dl_dir: str = "./data"
     seed: int = 42
 
 
@@ -59,7 +59,7 @@ def load_data_from_folder(data_path, test_size, seed):
     return train_df, test_df
 
 @step
-def google_train_data_loader(
+def gcp_train_data_loader(
     config: GoogleTrainDataLoderConfig,
 ) -> Output(train_df=pd.DataFrame, test_df=pd.DataFrame):
 

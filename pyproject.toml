@@ -14,7 +14,7 @@ dependencies = [
     "sqlalchemy>=1.4.41",
     "mysql-connector-python>=8.0.31",
     "pillow>=9.4.0",
-    "numpy>=1.24.1",
+    "numpy>=1.21.6",
 ]
 requires-python = "==3.8.10"
 license = {text = "MIT"}
@@ -50,22 +50,23 @@ exploration = [
     "matplotlib>=3.5.3",
     "kaggle>=1.5.12",
     "scikit-learn>=1.1.2",
-    "minio>=7.1.13",
 ]
 industrialisation = [
+    "kfp==1.8.16",
+    "kserve==0.9.0",
     "tensorflow==2.8.0",
     "tensorflow-io==0.24.0",
-    "hvac>=1.0.2",
     "evidently==0.1.54dev0",
-    "zenml[server]>=0.32.0",
-    "mlflow<1.26.0",
-    "mlserver>=0.5.3",
-    "mlserver-mlflow>=0.5.3",
-    "s3fs<2022.11.0",
-    "boto3>=1.24.59",
-    "aiohttp>=3.8.3",
-    "scipy>=1.10.0",
+    "zenml[server]==0.32.1",
+    "mlflow==1.25.1",
     "google-cloud-storage>=2.7.0",
+    "google-cloud-secret-manager>=2.15.1",
+    "gcsfs>=2023.1.0",
+    "google-cloud-aiplatform>=1.11.0",
+    "google-cloud-functions>=1.8.3",
+    "google-cloud-scheduler>=2.7.3",
+    "torch-model-archiver>=0.7.0",
+    "shapely<2.0",
 ]
 
 [tool.black]

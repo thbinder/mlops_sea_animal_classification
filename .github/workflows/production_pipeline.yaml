@@ -1,15 +1,18 @@
-name: staging_pipeline
+name: production_pipeline
 
 on:
-  pull_request:
-    branches:
-      - master
+  push:
+    branches: 
+    - "master"
     
 jobs:
-  run-staging-workflow:
+  run-production-workflow:
     runs-on: ubuntu-latest
     env:
       GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+      KUBEFLOW_USERNAME: ${{ secrets.KUBEFLOW_PRODUCTION_USERNAME }}
+      KUBEFLOW_PASSWORD: ${{ secrets.KUBEFLOW_PRODUCTION_PASSWORD }}
+      KUBEFLOW_NAMESPACE: ${{ secrets.KUBEFLOW_PRODUCTION_NAMESPACE }}
       ZENML_USERNAME: ${{ secrets.ZENML_USERNAME }}
       ZENML_PASSWORD: ${{ secrets.ZENML_PASSWORD }}
       ZENML_HOST: ${{ secrets.ZENML_HOST }}
@@ -43,12 +46,12 @@ jobs:
       - uses: syphar/restore-virtualenv@v1
         id: cache-virtualenv
         with:
-          requirement_files: 'requirements-gitfow.txt'
+          requirement_files: 'requirements-gitflow.txt'
 
       - uses: syphar/restore-pip-download-cache@v1
         if: steps.cache-virtualenv.outputs.cache-hit != 'true'
         with:
-          requirement_files: 'requirements-gitflow.txt'
+          requirement_files: 'requirements-gitfow.txt'
           
       - name: Install requirements
         if: steps.cache-virtualenv.outputs.cache-hit != 'true'
@@ -62,7 +65,7 @@ jobs:
           zenml connect --no-verify-ssl --url $ZENML_HOST --username $ZENML_USERNAME --password $ZENML_PASSWORD
       - name: Set stack
         run: |
-          zenml stack set stagging-gcp
+          zenml stack set production-gcp
       - name: Run pipeline
         run: |
           ./scripts/run_gcp_continuous_training_pipeline.sh
