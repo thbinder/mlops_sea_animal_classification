@@ -7,7 +7,6 @@ from sklearn.model_selection import train_test_split
 
 
 def generate_data_for_training(data_path, batch_size):
-
     image_dir = Path(data_path)
     # Get filepaths and labels
     filepaths = (

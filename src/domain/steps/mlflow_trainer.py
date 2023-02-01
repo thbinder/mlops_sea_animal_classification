@@ -4,9 +4,9 @@ import mlflow
 import pandas as pd
 import tensorflow as tf
 from keras_preprocessing.image import ImageDataGenerator
+from zenml.client import Client
 from zenml.integrations.mlflow.mlflow_utils import get_tracking_uri
 from zenml.steps import BaseParameters, Output, step
-from zenml.client import Client
 
 from src.domain.model import build_model
 
@@ -28,12 +28,13 @@ class TrainClassifierConfig(BaseParameters):
     memory_limit: int = 0
 
 
-@step(enable_cache=False, experiment_tracker=Client().active_stack.experiment_tracker.name)
+@step(
+    enable_cache=False, experiment_tracker=Client().active_stack.experiment_tracker.name
+)
 def train_classifier(
     config: TrainClassifierConfig,
     train_df: pd.DataFrame,
 ) -> Output(model=tf.keras.Model):
-
     # Check if GPU available
     print("GPUs Available: ", len(tf.config.list_physical_devices("GPU")))
     print("GPUs allowed: {}".format(config.allow_gpu))
@@ -41,7 +42,6 @@ def train_classifier(
     gpus = tf.config.list_physical_devices("GPU")
 
     if gpus:
-
         if not config.allow_gpu:
             print("GPUs not allowed for this run. Disabling...")
             try:

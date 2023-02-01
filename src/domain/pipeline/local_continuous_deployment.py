@@ -28,7 +28,6 @@ def local_continuous_deployment_pipeline(
     deployment_trigger,
     model_deployer,
 ):
-
     load_dotenv()
     train_df, test_df = load_data()
     skew_detector(train_df, test_df)
@@ -41,7 +40,6 @@ def local_continuous_deployment_pipeline(
 
 
 if __name__ == "__main__":
-
     pipeline = local_continuous_deployment_pipeline(
         load_data=local_train_data_loader(),
         skew_detector=evidently_skew_detector(),

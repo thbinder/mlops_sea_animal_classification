@@ -40,3 +40,6 @@ steps:
       file: src/domain/steps/deployment_trigger.py
     parameters:
       seiling: 0.8
+  model_deployer:
+    source:
+      name: kserve_deployer

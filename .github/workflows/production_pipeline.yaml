@@ -1,18 +1,15 @@
-name: production_pipeline
+name: staging_pipeline
 
 on:
   push:
-    branches: 
-    - "master"
+    branches:
+      - "master"
     
 jobs:
-  run-production-workflow:
+  run-staging-workflow:
     runs-on: ubuntu-latest
     env:
       GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-      KUBEFLOW_USERNAME: ${{ secrets.KUBEFLOW_PRODUCTION_USERNAME }}
-      KUBEFLOW_PASSWORD: ${{ secrets.KUBEFLOW_PRODUCTION_PASSWORD }}
-      KUBEFLOW_NAMESPACE: ${{ secrets.KUBEFLOW_PRODUCTION_NAMESPACE }}
       ZENML_USERNAME: ${{ secrets.ZENML_USERNAME }}
       ZENML_PASSWORD: ${{ secrets.ZENML_PASSWORD }}
       ZENML_HOST: ${{ secrets.ZENML_HOST }}
@@ -46,17 +43,17 @@ jobs:
       - uses: syphar/restore-virtualenv@v1
         id: cache-virtualenv
         with:
-          requirement_files: 'requirements-gitflow.txt'
+          requirement_files: 'requirements.txt'
 
       - uses: syphar/restore-pip-download-cache@v1
         if: steps.cache-virtualenv.outputs.cache-hit != 'true'
         with:
-          requirement_files: 'requirements-gitfow.txt'
+          requirement_files: 'requirements.txt'
           
       - name: Install requirements
         if: steps.cache-virtualenv.outputs.cache-hit != 'true'
         run: |
-          pip install -r requirements-gitflow.txt
+          pip install -r requirements.txt
       - name: Install wkhtmltopdf
         run: sudo apt-get install wkhtmltopdf
 
@@ -68,4 +65,4 @@ jobs:
           zenml stack set production-gcp
       - name: Run pipeline
         run: |
-          ./scripts/run_gcp_continuous_training_pipeline.sh
+          ./scripts/run_gcp_continuous_deployment_pipeline.sh

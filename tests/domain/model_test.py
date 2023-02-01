@@ -4,7 +4,6 @@ from src.domain.model import build_model
 
 
 def test_build_model():
-
     # build params
     input_shape = (200, 200, 3)
     denses = [10, 10, 10]

@@ -5,10 +5,12 @@ from typing import List
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from src.domain.class_mapping import class_mapping
+from google.cloud import storage
 from sklearn.model_selection import train_test_split
 from zenml.steps import BaseParameters, Output, step
-from google.cloud import storage
+
+from src.domain.class_mapping import class_mapping
+
 
 class GoogleTrainDataLoderConfig(BaseParameters):
     """Google Data Loading params"""
@@ -34,6 +36,7 @@ class LocalInferenceDataLoaderConfig(BaseParameters):
     target_shape: List[int] = [224, 224, 3]
     data_path: str = "./tests_data"
 
+
 def load_data_from_folder(data_path, test_size, seed):
     """Loading and splitting data for training purposes"""
 
@@ -58,37 +61,39 @@ def load_data_from_folder(data_path, test_size, seed):
 
     return train_df, test_df
 
+
 @step
 def gcp_train_data_loader(
     config: GoogleTrainDataLoderConfig,
 ) -> Output(train_df=pd.DataFrame, test_df=pd.DataFrame):
-
     dl_dir = config.dl_dir
     storage_client = storage.Client(project=config.project_id)
     bucket = storage_client.get_bucket(config.bucket_name)
 
     # Create folder for data if does not exist
     if not os.path.exists(dl_dir):
-            os.makedirs(dl_dir)
+        os.makedirs(dl_dir)
     # Retrieve raw data from every class
     for key in class_mapping:
-        if not os.path.exists(dl_dir+'/'+class_mapping[key]):
-            os.makedirs(dl_dir+'/'+class_mapping[key])
+        if not os.path.exists(dl_dir + "/" + class_mapping[key]):
+            os.makedirs(dl_dir + "/" + class_mapping[key])
         blobs = bucket.list_blobs(prefix=class_mapping[key])
         for blob in blobs:
-            filename = blob.name.replace('/', '_')[len(class_mapping[key])+1:]
-            blob.download_to_filename(dl_dir +'/'+class_mapping[key] + '/' + filename)
-    
+            filename = blob.name.replace("/", "_")[len(class_mapping[key]) + 1 :]
+            blob.download_to_filename(
+                dl_dir + "/" + class_mapping[key] + "/" + filename
+            )
+
     # Retrieve splitted data
     train_df, test_df = load_data_from_folder(config.dl_dir)
 
     return train_df, test_df
 
+
 @step
 def local_train_data_loader(
     config: LocalTrainDataLoderConfig,
 ) -> Output(train_df=pd.DataFrame, test_df=pd.DataFrame):
-
     return load_data_from_folder(config.data_path, config.test_size, config.seed)
 
 
@@ -120,7 +125,6 @@ def local_inference_data_loader(
 
     first_image_flag = True
     for img_path in filepaths:
-
         img_path = str(img_path)
         if first_image_flag:
             imgs_array = load_and_preprocess_image(img_path)
