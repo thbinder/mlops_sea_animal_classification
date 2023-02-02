@@ -25,7 +25,7 @@ make help
 ```
 This command will give you the list of jobs you can run with the Makefile, they should be self explanatory. They include starting unit testing, checking quality, running tests, coverage and cleaning your repo from temporary files.
 
-### 💻 AI Pipelines
+### 💻 Local AI Pipelines
 -------------
 
 Before running any pipeline you will need to do several things. First, set up (or reset) the default ZenML Stack and update it to use a the various components installed in the virtual environment.
@@ -50,6 +50,10 @@ To see your pipeline runs, you can deploy the zenml server and browse to its loc
 ```
 zenml up
 ```
+
+### 💻 GCP AI Pipelines
+-------------
+TODO
 
 ### 🐳 Deploy the API with Docker
 -------------

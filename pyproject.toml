@@ -67,6 +67,8 @@ industrialisation = [
     "google-cloud-scheduler>=2.7.3",
     "torch-model-archiver>=0.7.0",
     "shapely<2.0",
+    "mlserver==1.0.0",
+    "mlserver-mlflow==1.0.0",
 ]
 
 [tool.black]

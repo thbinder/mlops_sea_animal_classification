@@ -307,7 +307,7 @@ dependencies = [
 
 [[package]]
 name = "botocore"
-version = "1.24.46"
+version = "1.24.21"
 requires_python = ">= 3.6"
 summary = "Low-level, data-driven core of boto 3."
 dependencies = [
@@ -1502,6 +1502,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "mlserver"
+version = "1.0.0"
+summary = "ML server"
+dependencies = [
+    "click",
+    "fastapi",
+    "grpcio",
+    "numpy",
+    "pandas",
+    "protobuf",
+    "py-grpc-prometheus",
+    "starlette-exporter",
+    "uvicorn",
+]
+
+[[package]]
+name = "mlserver-mlflow"
+version = "1.0.0"
+summary = "MLflow runtime for MLServer"
+dependencies = [
+    "mlflow",
+    "mlserver",
+]
+
+[[package]]
 name = "monotonic"
 version = "1.6"
 summary = "An implementation of time.monotonic() for Python 2 & < 3.3"
@@ -1895,6 +1920,16 @@ name = "py"
 version = "1.11.0"
 requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 summary = "library with cross-python path, ini-parsing, io, code, log facilities"
+
+[[package]]
+name = "py-grpc-prometheus"
+version = "0.7.0"
+summary = "Python gRPC Prometheus Interceptors"
+dependencies = [
+    "grpcio>=1.10.0",
+    "prometheus-client>=0.3.0",
+    "setuptools>=39.0.1",
+]
 
 [[package]]
 name = "py-spy"
@@ -2386,6 +2421,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "starlette-exporter"
+version = "0.15.1"
+summary = "Prometheus metrics exporter for Starlette applications."
+dependencies = [
+    "prometheus-client>=0.12",
+    "starlette",
+]
+
+[[package]]
 name = "statsmodels"
 version = "0.13.5"
 requires_python = ">=3.7"
@@ -2792,7 +2836,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "4.1"
-content_hash = "sha256:9ec5487a02ad7ce15f11bea3762f8934c567335e0d4b7864e013c8f34196aa1d"
+content_hash = "sha256:1add5624417a88870b48e8ea72299ce5c4e78a48e7fb7849bf939e87395685c3"
 
 [metadata.files]
 "absl-py 1.4.0" = [
@@ -3079,9 +3123,9 @@ content_hash = "sha256:9ec5487a02ad7ce15f11bea3762f8934c567335e0d4b7864e013c8f34
     {url = "https://files.pythonhosted.org/packages/43/3f/a101f08cc93930b03ac06baf0d5f1b7c7ab0cdd76127bbb37e8dc9b7fe72/boto3-1.21.0.tar.gz", hash = "sha256:cc40566dec3f48611a82ace07b29489848e9bd35a51e3e992d1902a3c037e9fc"},
     {url = "https://files.pythonhosted.org/packages/8b/ab/d2294d713c7ee64033f891ab9c1ece964b4f7367861052b4417700efdcbd/boto3-1.21.0-py3-none-any.whl", hash = "sha256:25a76b7b530a124d9e526c62ff2b7da5782315195badb9a6273714898d689820"},
 ]
-"botocore 1.24.46" = [
-    {url = "https://files.pythonhosted.org/packages/5a/8a/f7230958ed29e2a65804f6eeee84bfff0dd4e964c272a96ac40b3871b173/botocore-1.24.46.tar.gz", hash = "sha256:89a203bba3c8f2299287e48a9e112e2dbe478cf67eaac26716f0e7f176446146"},
-    {url = "https://files.pythonhosted.org/packages/96/cb/dd5b165bf3bf7e3da57db4372e481928a09e1fc1452e805328a805f90515/botocore-1.24.46-py3-none-any.whl", hash = "sha256:663d8f02b98641846eb959c54c840cc33264d5f2dee5b8fc09ee8adbef0f8dcf"},
+"botocore 1.24.21" = [
+    {url = "https://files.pythonhosted.org/packages/68/56/c4858a29beb127d95cebe5889251fac4e059513c51452c66cb4660d61bee/botocore-1.24.21.tar.gz", hash = "sha256:7e976cfd0a61601e74624ef8f5246b40a01f2cce73a011ef29cf80a6e371d0fa"},
+    {url = "https://files.pythonhosted.org/packages/7e/44/1a5fa260bd89f06feeb0cfe647af9f0ad3e3858b2ad387e9e292c2a0baa6/botocore-1.24.21-py3-none-any.whl", hash = "sha256:92daca8775e738a9db9b465d533019285f09d541e903233261299fd87c2f842c"},
 ]
 "cachetools 5.3.0" = [
     {url = "https://files.pythonhosted.org/packages/4d/91/5837e9f9e77342bb4f3ffac19ba216eef2cd9b77d67456af420e7bafe51d/cachetools-5.3.0.tar.gz", hash = "sha256:13dfddc7b8df938c21a940dfa6557ce6e94a2f1cdfa58eb90c805721d58f2c14"},
@@ -3348,7 +3392,6 @@ content_hash = "sha256:9ec5487a02ad7ce15f11bea3762f8934c567335e0d4b7864e013c8f34
     {url = "https://files.pythonhosted.org/packages/23/93/e2d0ca3e60ad679d5f258d972cce1403cd0bbbd8be6fa5292ef0d229eb3d/debugpy-1.6.6-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:23c29e40e39ad7d869d408ded414f6d46d82f8a93b5857ac3ac1e915893139ca"},
     {url = "https://files.pythonhosted.org/packages/38/41/2db2dc852c508ae588490e0e9cd16e82bca1be24a99afc0e9794bcf53c95/debugpy-1.6.6-cp38-cp38-win32.whl", hash = "sha256:70ab53918fd907a3ade01909b3ed783287ede362c80c75f41e79596d5ccacd32"},
     {url = "https://files.pythonhosted.org/packages/4a/21/ea9d3b2928b86fdc822a920d427412a0240c537fde0346865342de24a7ef/debugpy-1.6.6-cp39-cp39-win_amd64.whl", hash = "sha256:de4a045fbf388e120bb6ec66501458d3134f4729faed26ff95de52a754abddb1"},
-    {url = "https://files.pythonhosted.org/packages/7c/23/9f6eb07a8720c92fce4feffafab4c2b2ba9f1c493a38cda7b1b982c1f9ff/debugpy-1.6.6-cp39-cp39-macosx_11_0_x86_64.whl", hash = "sha256:11a0f3a106f69901e4a9a5683ce943a7a5605696024134b522aa1bfda25b5fec"},
     {url = "https://files.pythonhosted.org/packages/88/a4/c2f6072cc889823daf4feb245cc06222fce138f30a50622ca61eaabc9913/debugpy-1.6.6-cp39-cp39-win32.whl", hash = "sha256:549ae0cb2d34fc09d1675f9b01942499751d174381b6082279cf19cdb3c47cbe"},
     {url = "https://files.pythonhosted.org/packages/8e/dd/969b0a865c1b28de92cc30ba00aabdf1a2d76ab437b3d91674d504da83c2/debugpy-1.6.6-cp310-cp310-win32.whl", hash = "sha256:87755e173fcf2ec45f584bb9d61aa7686bb665d861b81faa366d59808bbd3494"},
     {url = "https://files.pythonhosted.org/packages/ba/fa/9b081cb05a7e7081eb06f192f69c747c2ff37ab06e03f0a4005528a59e9d/debugpy-1.6.6-cp37-cp37m-win_amd64.whl", hash = "sha256:f6383c29e796203a0bba74a250615ad262c4279d398e89d895a69d3069498305"},
@@ -4304,6 +4347,14 @@ content_hash = "sha256:9ec5487a02ad7ce15f11bea3762f8934c567335e0d4b7864e013c8f34
     {url = "https://files.pythonhosted.org/packages/32/e8/997267657945b0e6fc57a466dccb8fd9693f3ff018750c26c2b4e2f6f7ea/mlflow-1.25.1.tar.gz", hash = "sha256:8c378f4516d6373f95bc57b6c7c2dca43f2650d49cee5ab6b9c3457fc46f0600"},
     {url = "https://files.pythonhosted.org/packages/89/cb/a38a8a57ab7d0b6fa07de9e32f2dbaab953474ef6954f6cc18301cc9fafa/mlflow-1.25.1-py3-none-any.whl", hash = "sha256:68e4bf115c56528928c4917eb1d51ec204e781c075878ed9261f38e4a41b8538"},
 ]
+"mlserver 1.0.0" = [
+    {url = "https://files.pythonhosted.org/packages/de/8f/ef9c6d667ade692ce55045004f957b37334ebca4a47b8866d4b7b380bf43/mlserver-1.0.0-py3-none-any.whl", hash = "sha256:219fba4169be11f43010435baaf38f02daa82165bce4b18653c2e0a26ea04984"},
+    {url = "https://files.pythonhosted.org/packages/fb/51/5eb44566be128751f0c5539b0176bf57d7120b92914034f41ec7403bd41f/mlserver-1.0.0.tar.gz", hash = "sha256:a7cb393a04b7554dec37ec4365d97c6a1e1eb594dfe9060a13f88b49bd4de6cc"},
+]
+"mlserver-mlflow 1.0.0" = [
+    {url = "https://files.pythonhosted.org/packages/4e/ab/1feeb58c2afec3a0651de872269db9f03d393b7a1ffb4d2691fa997a69b9/mlserver_mlflow-1.0.0-py3-none-any.whl", hash = "sha256:1a899a49f888cdbaa09c9dfc9dfe00c76772f976154f6481a4906b1e13f56002"},
+    {url = "https://files.pythonhosted.org/packages/a2/42/59609b1ffdb4d0a9cf9cc2fd9ffa8fbf36362012cad5bc089af1637fb8dc/mlserver-mlflow-1.0.0.tar.gz", hash = "sha256:9a817c27109d81d14169d66d428ab47b1d6c634764f6e3a3b79390121529c739"},
+]
 "monotonic 1.6" = [
     {url = "https://files.pythonhosted.org/packages/9a/67/7e8406a29b6c45be7af7740456f7f37025f0506ae2e05fb9009a53946860/monotonic-1.6-py2.py3-none-any.whl", hash = "sha256:68687e19a14f11f26d140dd5c86f3dba4bf5df58003000ed467e0e2a69bca96c"},
     {url = "https://files.pythonhosted.org/packages/ea/ca/8e91948b782ddfbd194f323e7e7d9ba12e5877addf04fb2bf8fca38e86ac/monotonic-1.6.tar.gz", hash = "sha256:3a55207bcfed53ddd5c5bae174524062935efed17792e9de2ad0205ce9ad63f7"},
@@ -4820,6 +4871,10 @@ content_hash = "sha256:9ec5487a02ad7ce15f11bea3762f8934c567335e0d4b7864e013c8f34
 "py 1.11.0" = [
     {url = "https://files.pythonhosted.org/packages/98/ff/fec109ceb715d2a6b4c4a85a61af3b40c723a961e8828319fbcb15b868dc/py-1.11.0.tar.gz", hash = "sha256:51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719"},
     {url = "https://files.pythonhosted.org/packages/f6/f0/10642828a8dfb741e5f3fbaac830550a518a775c7fff6f04a007259b0548/py-1.11.0-py2.py3-none-any.whl", hash = "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"},
+]
+"py-grpc-prometheus 0.7.0" = [
+    {url = "https://files.pythonhosted.org/packages/37/9b/b2e5d51f2b0f2aa87743755f6cfa7c98a2cf608d1defe9c30a6c910bc1bb/py_grpc_prometheus-0.7.0-py3-none-any.whl", hash = "sha256:b171ad09d2884e72b11847e4eba76f06da53e8ef0b8415ca95705d978a22d1eb"},
+    {url = "https://files.pythonhosted.org/packages/b5/ea/1e650913fbe7ca85bf9ed93721850e01326386c0e2b0b1249782459c997e/py_grpc_prometheus-0.7.0.tar.gz", hash = "sha256:72248c4dfa48c4d9f628f89a90cb9dd27674d6a21b252c53700c3adc50e9552e"},
 ]
 "py-spy 0.3.14" = [
     {url = "https://files.pythonhosted.org/packages/3d/14/47fa8b0cb7e9c95117682dfcfaf6245256553bdff7ca83ba4b89db226858/py_spy-0.3.14-py2.py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:fd6211fe7f587b3532ba9d300784326d9a6f2b890af7bf6fff21a029ebbc812b"},
@@ -5394,6 +5449,10 @@ content_hash = "sha256:9ec5487a02ad7ce15f11bea3762f8934c567335e0d4b7864e013c8f34
 "starlette 0.17.1" = [
     {url = "https://files.pythonhosted.org/packages/11/d3/c346849b8201f0e0339e23850c8db1cebd477e44e8b5212f40e1acbb490c/starlette-0.17.1.tar.gz", hash = "sha256:57eab3cc975a28af62f6faec94d355a410634940f10b30d68d31cb5ec1b44ae8"},
     {url = "https://files.pythonhosted.org/packages/32/57/e9c68acc2845ee4ca66202d19856f6a3581cab2a885d25d490103270ffa2/starlette-0.17.1-py3-none-any.whl", hash = "sha256:26a18cbda5e6b651c964c12c88b36d9898481cd428ed6e063f5f29c418f73050"},
+]
+"starlette-exporter 0.15.1" = [
+    {url = "https://files.pythonhosted.org/packages/0c/28/5ef1e05bd24984d508e93d4a0319b7f63f8ce5d3c33dd1515507c024f76e/starlette_exporter-0.15.1-py3-none-any.whl", hash = "sha256:24eeaef01f05ef973984704427f6e6a93d468f487b8b26ad77548d963affc9fe"},
+    {url = "https://files.pythonhosted.org/packages/7c/6d/72fbe02fd9dec57c8990f466255082a26a7b298ccf8a6960f79f3286b746/starlette_exporter-0.15.1.tar.gz", hash = "sha256:3bde5d863effb26684210fe016a1ebf2b383efedf21a4b2f28585ec5064f4033"},
 ]
 "statsmodels 0.13.5" = [
     {url = "https://files.pythonhosted.org/packages/00/17/6853123ccfcd68b8c17bd8148f28c12213b5fe8371ad5cb7ea7bcab51c0e/statsmodels-0.13.5-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:9b21648e3a8e7514839ba000a48e495cdd8bb55f1b71c608cf314b05541e283b"},

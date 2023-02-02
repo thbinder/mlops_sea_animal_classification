@@ -1,3 +1,4 @@
+import os
 import warnings
 
 from absl import logging as absl_logging
@@ -25,6 +26,7 @@ docker_settings = DockerSettings(
     install_stack_requirements=False,
 )
 
+# kserve deployment step settings
 kserve_deployer = kserve_model_deployer_step(
     KServeDeployerStepParameters(
         service_config=KServeDeploymentConfig(
@@ -38,7 +40,10 @@ kserve_deployer = kserve_model_deployer_step(
 )
 
 
-@pipeline(enable_cache=False, settings={"docker": docker_settings})
+@pipeline(
+    enable_cache=False,
+    settings={"docker": docker_settings},
+)
 def gcp_continuous_deployment_pipeline(
     load_data, train_model, evaluate_model, deployment_trigger, model_deployer
 ):
