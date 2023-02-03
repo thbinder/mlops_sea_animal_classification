@@ -34,7 +34,7 @@ jobs:
  
       - name: Authenticate docker
         run: |
-          gcloud auth configure-docker --project mlops-sea-animal
+          gcloud auth configure-docker --project mlops-demos-376509
         
       - uses: actions/setup-python@v4
         with:
@@ -62,7 +62,7 @@ jobs:
           zenml connect --no-verify-ssl --url $ZENML_HOST --username $ZENML_USERNAME --password $ZENML_PASSWORD
       - name: Set stack
         run: |
-          zenml stack set production-gcp
+          zenml stack set gcp-kubeflow-kserve
       - name: Run pipeline
         run: |
           ./scripts/run_gcp_continuous_deployment_pipeline.sh

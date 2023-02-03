@@ -30,7 +30,7 @@ docker_settings = DockerSettings(
 kserve_deployer = kserve_model_deployer_step(
     KServeDeployerStepParameters(
         service_config=KServeDeploymentConfig(
-            model_name="SEA_ANIMALS_CLASSIFICATION",
+            model_name="sea-animals-classifier",
             replicas=1,
             predictor="tensorflow",
             resources={"requests": {"cpu": "200m", "memory": "500m"}},
@@ -44,7 +44,7 @@ kserve_deployer = kserve_model_deployer_step(
     enable_cache=False,
     settings={"docker": docker_settings},
 )
-def gcp_continuous_deployment_pipeline(
+def gcp_deployment_pipeline(
     load_data, train_model, evaluate_model, deployment_trigger, model_deployer
 ):
     load_dotenv()

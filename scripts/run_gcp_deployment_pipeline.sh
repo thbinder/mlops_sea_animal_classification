@@ -1,0 +1,1 @@
+zenml pipeline run src/domain/pipeline/gcp_deployment.py -c config/pipeline/gcp_deployment_config.yaml

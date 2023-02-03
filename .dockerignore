@@ -1,4 +1,4 @@
-data/
+production_data/
 tests/
 tests_data/
 tests_integration/

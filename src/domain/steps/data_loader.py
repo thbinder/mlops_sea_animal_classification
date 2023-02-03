@@ -18,7 +18,7 @@ class GoogleTrainDataLoderConfig(BaseParameters):
     test_size: float = 0.2
     bucket_name: str = "sea-animals-data"
     project_id: str = "mlops-demos-376509"
-    dl_dir: str = "./data"
+    dl_dir: str = "/data"
     seed: int = 42
 
 
@@ -59,6 +59,11 @@ def load_data_from_folder(data_path, test_size, seed):
         image_df, test_size=test_size, shuffle=True, random_state=seed
     )
 
+    print("Data prepared for training.")
+    print("training data size: {}".format(train_df.size))
+    print("validation data size: {}".format(test_df.size))
+    print(train_df.head())
+
     return train_df, test_df
 
 
@@ -70,22 +75,30 @@ def gcp_train_data_loader(
     storage_client = storage.Client(project=config.project_id)
     bucket = storage_client.get_bucket(config.bucket_name)
 
+    print("Creating folders...")
     # Create folder for data if does not exist
     if not os.path.exists(dl_dir):
         os.makedirs(dl_dir)
+        print("{} folder created".format(dl_dir))
     # Retrieve raw data from every class
+    print("Starting download.")
     for key in class_mapping:
         if not os.path.exists(dl_dir + "/" + class_mapping[key]):
+            print("{} folder created".format(dl_dir + "/" + class_mapping[key]))
             os.makedirs(dl_dir + "/" + class_mapping[key])
         blobs = bucket.list_blobs(prefix=class_mapping[key])
+        print("Downloading data for: {}.".format(class_mapping[key]))
         for blob in blobs:
             filename = blob.name.replace("/", "_")[len(class_mapping[key]) + 1 :]
             blob.download_to_filename(
                 dl_dir + "/" + class_mapping[key] + "/" + filename
             )
 
+    print("Download completed.")
     # Retrieve splitted data
-    train_df, test_df = load_data_from_folder(config.dl_dir)
+    train_df, test_df = load_data_from_folder(
+        config.dl_dir, config.test_size, config.seed
+    )
 
     return train_df, test_df
 

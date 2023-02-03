@@ -10,6 +10,8 @@ model
 
 # data
 data/
+staging_data/
+production_data/
 
 # python
 __pycache__/
