@@ -61,7 +61,7 @@ def gcp_deployment_pipeline(
 
 
 if __name__ == "__main__":
-    pipeline = gcp_continuous_deployment_pipeline(
+    pipeline = gcp_deployment_pipeline(
         load_data=gcp_train_data_loader(),
         train_model=train_classifier(),
         evaluate_model=evaluate_classifier(),

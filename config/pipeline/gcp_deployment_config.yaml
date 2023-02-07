@@ -6,7 +6,7 @@ steps:
       file: src/domain/steps/data_loader.py
     parameters:
       test_size: 0.2
-      data_pth: "./data"
+      data_pth: "./data/staging_data/"
       seed: 42
   train_model:
     source:
