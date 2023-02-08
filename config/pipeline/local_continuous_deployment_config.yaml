@@ -6,7 +6,7 @@ steps:
       file: src/domain/steps/data_loader.py
     parameters:
       test_size: 0.2
-      data_path: './data/staging_data'
+      data_path: './data/production_data'
       seed: 42
   skew_detector:
     source:
