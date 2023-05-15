@@ -1,8 +1,8 @@
-name: inference_pipeline
+name: local_inference_pipeline
 steps:
-  inference_data_loader:
+  local_inference_data_loader:
     source:
-      name: inference_data_loader
+      name: local_inference_data_loader
       file: src/domain/steps/data_loader.py
     parameters:
       data_path: "./tests_data"
@@ -12,7 +12,7 @@ steps:
       name: prediction_service_loader
       file: src/domain/steps/service_loader.py
     parameters:
-      pipeline_name: "train_continuous_deployment_pipeline"
+      pipeline_name: "local_continuous_deployment_pipeline"
       pipeline_step_name: "mlflow_model_deployer_step"
   predictor:
     source:

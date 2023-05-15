@@ -1,20 +1,13 @@
-name: train_continuous_deployment_pipeline
+name: gcp_deployment_pipeline
 steps:
   load_data:
     source:
-      name: train_data_loader
+      name: local_train_data_loader
       file: src/domain/steps/data_loader.py
     parameters:
       test_size: 0.2
-      data_path: './data'
+      data_pth: "./data/staging_data/"
       seed: 42
-  skew_detector:
-    source:
-      name: evidently_skew_detector
-    parameters:
-      step_name: "evidently_skew_detector"
-      ignored_cols: ["Filepath"]
-      profile_sections: ["datadrift"]
   train_model:
     source:
       name: train_classifier
@@ -28,9 +21,9 @@ steps:
       adam_param: 0.00001
       metrics: ["accuracy"]
       loss: "categorical_crossentropy"
-      nb_epochs: 20
+      nb_epochs: 1
       seed: 42
-      allow_gpu: True
+      allow_gpu: False
       memory_limit: 4096
   evaluate_model:
     source:
@@ -47,4 +40,4 @@ steps:
       seiling: 0.8
   model_deployer:
     source:
-      name: mlflow_model_deployer_step
+      name: kserve_deployer

@@ -1,4 +1,4 @@
-data/
+data/production_data/
 tests/
 tests_data/
 tests_integration/
@@ -9,6 +9,7 @@ exploration/
 config/
 infra/
 
+.env
 duties.py
 Makefile
 ChangeLog.md

@@ -1,5 +1,6 @@
 # infra
 zenml_stack_recipes
+keys
 
 # ml
 .zen
@@ -9,6 +10,8 @@ model
 
 # data
 data/
+staging_data/
+production_data/
 
 # python
 __pycache__/

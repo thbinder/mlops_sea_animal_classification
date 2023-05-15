@@ -32,6 +32,7 @@ api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
 # data structure creation in mysql
 models.Base.metadata.create_all(bind=engine)
 
+
 # Dependency
 def get_db():
     db = SessionLocal()

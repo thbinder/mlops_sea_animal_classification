@@ -4,7 +4,6 @@ from src.domain.data_preparation import generate_data_for_training
 
 
 def test_generate_data_for_training():
-
     # build params
     data_path = "./tests_data"
     batch_size = 1

@@ -25,7 +25,7 @@ make help
 ```
 This command will give you the list of jobs you can run with the Makefile, they should be self explanatory. They include starting unit testing, checking quality, running tests, coverage and cleaning your repo from temporary files.
 
-### 🧠 AI Pipelines
+### 💻 Local AI Pipelines
 -------------
 
 Before running any pipeline you will need to do several things. First, set up (or reset) the default ZenML Stack and update it to use a the various components installed in the virtual environment.
@@ -51,7 +51,11 @@ To see your pipeline runs, you can deploy the zenml server and browse to its loc
 zenml up
 ```
 
-### 🐳 Simple Docker API
+### 💻 GCP AI Pipelines
+-------------
+TODO
+
+### 🐳 Deploy the API with Docker
 -------------
 
 To distribute the model, one convenient way is to build the associated docker image with the model wrapped around a REST API. This can be done with the following command.
@@ -72,9 +76,6 @@ cd ./tests_integration
 ./start.sh
 ```
 
-### 🐳 Docker Compose API Deployment
--------------
-
 A more robust API can be deployed along with a MYSQL database holding information about authorized users. Prior to running the compose stack, you will need to fill the .env file with adapted parameters.
 
 ```
@@ -82,3 +83,16 @@ docker-compose up
 ```
 
 Afterwards, the API should be accessible on port 8081.
+
+### 📦 GitHub Workflow
+-------------
+
+This workflow is meant to be run as part of an automated continuous deployment job that is used to deploy one of both of a new model and an API to production, whenever a change is merged into the main repository branch on GitHub.
+
+## How to trigger
+
+- Create a branch, commit changes, and make a PR to the main branch of the repo. This will trigger the stagging workflow
+- Merging a PR to the main branch will trigger the production workflow
+- Pushing directly to the main branch will trigger the production workflow as well
+
+For now workflow consists of building the docker image containing the API, testing it and pushing it to DockerHub (if production workflow). There is no automated CI/CD for pipelines at the moment.

@@ -8,7 +8,7 @@ from zenml.integrations.mlflow.steps import (
 )
 from zenml.pipelines import pipeline
 
-from src.domain.steps.data_loader import train_data_loader
+from src.domain.steps.data_loader import local_train_data_loader
 from src.domain.steps.deployment_trigger import deployment_trigger
 from src.domain.steps.mlflow_evaluator import evaluate_classifier
 from src.domain.steps.mlflow_trainer import train_classifier
@@ -20,7 +20,7 @@ absl_logging.set_verbosity(-10000)
 
 
 @pipeline(enable_cache=False)
-def train_continuous_deployment_pipeline(
+def local_continuous_deployment_pipeline(
     load_data,
     skew_detector,
     train_model,
@@ -28,7 +28,6 @@ def train_continuous_deployment_pipeline(
     deployment_trigger,
     model_deployer,
 ):
-
     load_dotenv()
     train_df, test_df = load_data()
     skew_detector(train_df, test_df)
@@ -41,9 +40,8 @@ def train_continuous_deployment_pipeline(
 
 
 if __name__ == "__main__":
-
-    pipeline = train_continuous_deployment_pipeline(
-        load_data=train_data_loader(),
+    pipeline = local_continuous_deployment_pipeline(
+        load_data=local_train_data_loader(),
         skew_detector=evidently_skew_detector(),
         train_model=train_classifier(),
         evaluate_model=evaluate_classifier(),

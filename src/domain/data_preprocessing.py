@@ -5,7 +5,6 @@ from PIL import Image
 
 
 def preprocess_image_to_array(data):
-
     """Prepares image data from buffer image for inference"""
 
     img = Image.open(BytesIO(data))

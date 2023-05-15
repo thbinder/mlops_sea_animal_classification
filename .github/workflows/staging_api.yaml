@@ -1,4 +1,4 @@
-name: stagging_api
+name: staging_api
 
 on:
   pull_request:
