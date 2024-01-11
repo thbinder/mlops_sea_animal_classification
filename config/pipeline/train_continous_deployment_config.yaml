@@ -22,7 +22,7 @@ steps:
     parameters:
       validation_split: 0.2
       input_shape: [224, 224, 3]
-      dense_layers: [256, 256, 19]
+      dense_layers: [256, 256, 23]
       dropout_layers: [0.2, 0.2]
       batch_size: 16
       adam_param: 0.00001

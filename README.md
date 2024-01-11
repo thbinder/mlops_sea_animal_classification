@@ -19,6 +19,12 @@ You shoud start by installing [PDM](https://github.com/pdm-project/pdm) the way 
 pdm install
 ```
 
+To create a virtual env to run notebooks
+```
+pdm venv create
+pdm sync --venv 'in-project'
+```
+
 To try and run basic duties you can simply try out the following commands:
 ```
 make help
